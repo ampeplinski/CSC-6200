@@ -33,6 +33,15 @@ class Element {
     //Element pop() {
     //return;
     //}
+    void printMatrix(){
+        Element *iteration = head;
+        while(iteration){
+            cout << '{'<< iteration->row << ","
+                       << iteration->column << ","
+                       << iteration->value <<  "}" << endl;
+            iteration = iteration->Next;
+        }
+    }
 };
 
 void outputElements(Element input) {
@@ -72,7 +81,9 @@ Element promptMatrix() {
 
         current.push(row, column, value);
 
-        cout << current.value << endl;
+        current.printMatrix();
+
+        //cout << current.value << endl;
 
 
 
@@ -95,5 +106,6 @@ Element promptMatrix() {
 }
 
 int main() {
+    promptMatrix();
     return 0;
 }
