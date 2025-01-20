@@ -33,7 +33,7 @@ class Element {
     //Element pop() {
     //return;
     //}
-    void printMatrix(){
+    void printList(){
         Element *iteration = head;
         while(iteration){
             cout << '{'<< iteration->row << ","
@@ -42,6 +42,50 @@ class Element {
             iteration = iteration->Next;
         }
     }
+    void printMatrix(int matrixWidth, int matrixlength){
+        int boolean = 0;
+        for (int row = 0; row < matrixlength-1; row++){
+          
+            //Element *iteration = head;
+            //cout << "checking row:" << row << endl; 
+            
+            for (int columncounter = 0; columncounter < matrixWidth; columncounter++){
+                boolean = 0;
+                //cout << "checking column:" << (columncounter) << endl; 
+                Element *iteration = head;
+                //cout << "pointer: " << iteration << endl;
+                while(iteration){
+                    //cout << "pointer: " << iteration << endl;
+                                        
+                    if (row == iteration->row){
+                        //for (int column = 0; column < matrixWidth; column++){
+                            //cout << "columncounter" << (columncounter) << endl;
+                            
+                            //cout << "datacolumn"<< iteration->column << endl;
+                            if (columncounter== iteration->column){
+                                cout << iteration->value <<  " ";
+                                boolean = 1;
+                            }
+                        //}
+                    
+        
+                    }
+                    else{
+                    }
+                    iteration = iteration->Next;
+                    
+                };
+                if(boolean == 0){
+                    cout << "0 ";
+                } 
+            };
+            cout << endl;
+            
+            //if ((i+1) % 5 == 0){
+            //    cout << endl;
+        }
+    }
+    
 };
 
 void outputElements(Element input) {
@@ -71,17 +115,14 @@ Element promptMatrix() {
         cout << "type a 0 for continue and 1 to stop" << endl;
         cin >> continueflag;
 
-        if (continueflag == 1){
-            break;
-        };
-
-
-
         //Element next = current;
 
         current.push(row, column, value);
 
-        current.printMatrix();
+        current.printList();
+        if (continueflag == 1){
+            break;
+        };
 
         //cout << current.value << endl;
 
@@ -100,6 +141,13 @@ Element promptMatrix() {
         //else
         //    current.Next = next
     }
+    int matrixSize;
+    cout << "type the size of the matrix" << endl;
+    cin >> matrixSize;
+    int matrixlength;
+    cout << "type the height of the matrix" << endl;
+    cin >> matrixlength;
+    current.printMatrix(matrixSize, matrixlength);
 
     //return &result;
     return current;
