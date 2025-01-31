@@ -98,8 +98,16 @@ class Graph(object):
         """
         get a edge...
         """
-        edge_string = starting_vertex + "," + ending_vertex
-        return self._edges_formal_description[edge_string]
+        for edge_string, edge_object in self._edges_formal_description.items():
+            print(f"checking edge: {edge_string}")
+
+            verticies = edge_string.split(",")
+            if verticies[0] == starting_vertex and verticies[1] == ending_vertex:
+                print("found edge")
+                return self._edges_formal_description[edge_string]
+            else:
+                print("No edge found")
+                return None
 
 
 
@@ -159,8 +167,9 @@ def main():
         for unvisited_node_vertex, distance in distances.items():
             print(f"unvisited_node: {unvisited_node_vertex}")
             print(f"distance: {distance}")
-            if previous_distnace > distance:
+            if distance < previous_distnace:
                 current = unvisited_node_vertex
+                previous_distnace = distance
 
         
         print(f"current: {current}")
