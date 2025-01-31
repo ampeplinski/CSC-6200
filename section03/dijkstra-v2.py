@@ -150,9 +150,9 @@ def main():
     for vertex_string, vertex_object in unvisited_nodes.items():
             distance = vertex_object["shortest_distance_form_start"]
             #print(f"vertex string:{vertex_string} distance: {distance}")
-            distances[vertex_string] = distance
+            distances[vertex_string] = vertex_object
     
-    distances[start_vertex_string] = 0
+    distances[start_vertex_string] = {"shortest_distance_form_start": 0, 'previous_vertex': None}
     for node, distance in distances.items():
         print(f"node: {node}")
         print(f"distance: {distance}")
@@ -174,9 +174,9 @@ def main():
         for nieghbor in graph_g1.get_neighbors(current):
             print(f"current nieghbor: {nieghbor}")
 
-            tentative_distance = distances[current] + int(graph_g1.get_edge(current, nieghbor)["edge_weight"])
-            if tentative_distance < distances[nieghbor]:
-                distances[nieghbor] = tentative_distance
+            tentative_distance = distances[current]["shortest_distance_form_start"] + int(graph_g1.get_edge(current, nieghbor)["edge_weight"])
+            if tentative_distance < distances[nieghbor]["shortest_distance_form_start"]:
+                distances[nieghbor]["shortest_distance_form_start"] = tentative_distance
         
         del unvisited_nodes[current]
 
