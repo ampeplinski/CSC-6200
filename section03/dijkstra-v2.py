@@ -64,9 +64,6 @@ class Graph(object):
             if verticies[0] == vertex_name:
                 paired_vertex = verticies[1]
                 list_of_neighbors.append(paired_vertex)
-            if verticies[1] == vertex_name:
-                paired_vertex = verticies[0]
-                list_of_neighbors.append(paired_vertex)
                 
         return list_of_neighbors
     
@@ -164,12 +161,12 @@ def main():
         previous_distnace = 9999999999
         #print(type(unvisited_nodes))
         current = ""
-        for unvisited_node_vertex, distance in distances.items():
-            print(f"unvisited_node: {unvisited_node_vertex}")
+        for unvisited_string, unvisited_details in unvisited_nodes.items():
+            print(f"unvisited_node: {unvisited_string}")
             print(f"distance: {distance}")
-            if distance < previous_distnace:
-                current = unvisited_node_vertex
-                previous_distnace = distance
+            if unvisited_details['shortest_distance_form_start'] < previous_distnace:
+                current = unvisited_string
+                previous_distnace = unvisited_details['shortest_distance_form_start']
 
         
         print(f"current: {current}")
