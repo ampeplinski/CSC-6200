@@ -182,6 +182,8 @@ def main():
 
         print(f"unvisited_nodes: {unvisited_nodes}")
 
+        print(f"distances: {distances}")
+
         visited_nodes.append(current)
 
 
