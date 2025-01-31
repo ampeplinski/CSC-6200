@@ -139,7 +139,8 @@ class Vertex(Graph):
         """
         Effects: returns the neighbors
         """
-        super().scan_for_edge()
+        #super().scan_for_edge()
+        
 
 class Edge(Graph):
     """
@@ -191,6 +192,8 @@ def main():
 
     while True:
         vertex_name = input("Enter the Vertex Name: ")
+
+        vertext
         vertex = Vertex(vertex_name)
         vertex.print_name()
         graph_g1.set_vertex(vertex)
@@ -246,6 +249,7 @@ def main():
             
             for current_string, current_object in current.items():
                 print(f"current_string: {current_string}")
+                current_object.get_neighbors()
                 #graph_g1.get_neighbors(current_string)
 
 
