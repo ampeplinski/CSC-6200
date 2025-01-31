@@ -62,7 +62,7 @@ class Graph(object):
 
             verticies = edge_string.split(",")
             for vertex in verticies:
-                print(f"verticies: {verticies}")
+                print(f"verticies: {vertex}")
                 desired_edge = vertex_name
                 if vertex == desired_edge:
                     list_of_neighbors.append(vertex)
@@ -153,17 +153,20 @@ def main():
     while unvisited_nodes:
         min_distance = 999999999
         print(type(unvisited_nodes))
+        current = {}
         for unvisited_node_vertex, vertex_details in unvisited_nodes.items():
             print(f"unvisited_node: {unvisited_node_vertex}")
             print(f"unvisited_node: {vertex_details}")
             if distances[unvisited_node_vertex] < min_distance:
-                min_distance = distances[unvisited_node]
+                min_distance = distances[unvisited_node_vertex]
                 current[unvisited_node_vertex] = vertex_details
         
         for current_string, current_object in current.items():
             print(f"current_string: {current_string}")
             list_of_neighbors = graph_g1.get_neighbors(current_string)
             print(list_of_neighbors)
+
+        break
 
 
 
