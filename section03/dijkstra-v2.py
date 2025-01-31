@@ -105,9 +105,9 @@ class Graph(object):
             if verticies[0] == starting_vertex and verticies[1] == ending_vertex:
                 print("found edge")
                 return self._edges_formal_description[edge_string]
-            else:
-                print("No edge found")
-                return None
+
+        print("No edge found")
+        return None
 
 
 
@@ -182,6 +182,8 @@ def main():
                 distances[nieghbor] = tentative_distance
         
         del unvisited_nodes[current]
+
+        print(f"unvisited_nodes: {unvisited_nodes}")
 
         visited_nodes.append(current)
 
