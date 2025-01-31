@@ -153,19 +153,21 @@ def main():
 
     while unvisited_nodes:
         min_distance = 999999999
-        print(type(unvisited_nodes))
-        current = {}
-        for unvisited_node_vertex, vertex_details in unvisited_nodes.items():
+        #print(type(unvisited_nodes))
+        current = ""
+        for unvisited_node_vertex, vertex_details in distances.items():
             print(f"unvisited_node: {unvisited_node_vertex}")
             print(f"unvisited_node: {vertex_details}")
             if distances[unvisited_node_vertex] < min_distance:
                 min_distance = distances[unvisited_node_vertex]
-                current[unvisited_node_vertex] = vertex_details
+                current = unvisited_node_vertex
         
-        for current_string, current_object in current.items():
-            print(f"current_string: {current_string}")
-            list_of_neighbors = graph_g1.get_neighbors(current_string)
-            print(list_of_neighbors)
+        print(f"current: {current}")
+
+        for nieghbor in graph_g1.get_neighbors(current):
+            print(f"current nieghbor: {nieghbor}")
+
+            #tentative_distance = distances[current] + graph_g1.get_edge(current, nieghbor)
 
         break
 
