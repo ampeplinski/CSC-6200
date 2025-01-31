@@ -61,13 +61,14 @@ class Graph(object):
             print(f"checking edge: {edge_string}")
 
             verticies = edge_string.split(",")
-            for vertex in verticies:
-                print(f"verticies: {vertex}")
-                desired_edge = vertex_name
-                if vertex == desired_edge:
-                    list_of_neighbors.append(vertex)
+            if verticies[0] == vertex_name:
+                paired_vertex = verticies[1]
+                list_of_neighbors.append(paired_vertex)
+            if verticies[1] == vertex_name:
+                paired_vertex = verticies[0]
+                list_of_neighbors.append(paired_vertex)
                 
-            return list_of_neighbors
+        return list_of_neighbors
     
     def set_vertex(self, vertex_name):
         """
