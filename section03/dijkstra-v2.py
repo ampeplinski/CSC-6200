@@ -52,18 +52,22 @@ class Graph(object):
                 
             return edge_object
 
-    def get_neighbors(self, starting_vertex, ending_vertex):
+    def get_neighbors(self, vertex_name):
         """
         scans for edge using adjacent and neighbors
         """
+        list_of_neighbors = []
         for edge_string, edge_object in self._edges_formal_description.items():
-            #print(f"checking edge: {edge_string}")
-            #edge_object.print_edge_points()
-            desired_edge = starting_vertex + " , " + ending_vertex
-            if edge_string == desired_edge:
-                edge_object.print_edge_points()
+            print(f"checking edge: {edge_string}")
+
+            verticies = edge_string.split(",")
+            for vertex in verticies:
+                print(f"verticies: {verticies}")
+                desired_edge = vertex_name
+                if vertex == desired_edge:
+                    list_of_neighbors.append(vertex)
                 
-            return edge_object
+            return list_of_neighbors
     
     def set_vertex(self, vertex_name):
         """
@@ -85,7 +89,7 @@ class Graph(object):
         """
         edge_dict= { "starting_vertex": starting_vertex , "ending_vertex": ending_vertex, "edge_weight": edge_weight }
 
-        edge_string = starting_vertex + " , " + ending_vertex
+        edge_string = starting_vertex + "," + ending_vertex
         
         self._edges_formal_description[edge_string] = edge_dict
 
@@ -102,7 +106,7 @@ def main():
 
     while True:
         vertex_name = input("Enter the Vertex Name: ")
-        graph_g1.set_vertex(vertex)
+        graph_g1.set_vertex(vertex_name)
         graph_g1.print_graph()
 
         has_connection = input("Enter a connection?(y/n): ")
@@ -131,29 +135,36 @@ def main():
     #selected_edge.print_edge_weight()
 
     #def dijkstras(graph_g1, start_vertex_string):
-    
+
     unvisited_nodes =  graph_g1.get_verticies()
     visited_nodes = {}
     distances = {}
 
     for vertex_string, vertex_object in unvisited_nodes.items():
-            distance = vertex_object.get_distance()
-            print(f"vertex string:{vertex_string} distance: {distance}")
+            distance = vertex_object["shortest_distance_form_start"]
+            #print(f"vertex string:{vertex_string} distance: {distance}")
             distances[vertex_string] = distance
     
     distances[start_vertex_string] = 0
+    for node, distance in distances.items():
+        print(f"node: {node}")
+        print(f"distance: {distance}")
 
     while unvisited_nodes:
         min_distance = 999999999
-        for unvisited_node in unvisited_nodes:
-            if distances[unvisited_node.get_name()] < min_distance:
+        print(type(unvisited_nodes))
+        for unvisited_node_vertex, vertex_details in unvisited_nodes.items():
+            print(f"unvisited_node: {unvisited_node_vertex}")
+            print(f"unvisited_node: {vertex_details}")
+            if distances[unvisited_node_vertex] < min_distance:
                 min_distance = distances[unvisited_node]
-                current = unvisited_node
+                current[unvisited_node_vertex] = vertex_details
         
         for current_string, current_object in current.items():
             print(f"current_string: {current_string}")
-            current_object.get_neighbors()
-            #graph_g1.get_neighbors(current_string)
+            list_of_neighbors = graph_g1.get_neighbors(current_string)
+            print(list_of_neighbors)
+
 
 
         
