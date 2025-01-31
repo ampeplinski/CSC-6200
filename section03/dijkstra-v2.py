@@ -94,11 +94,12 @@ class Graph(object):
         
         self._edges_formal_description[edge_string] = edge_dict
 
-    def get_edge(self, edge_name):
+    def get_edge(self, starting_vertex, ending_vertex):
         """
         get a edge...
         """
-        return self._edges_formal_description[edge_name]
+        edge_string = starting_vertex + "," + ending_vertex
+        return self._edges_formal_description[edge_string]
 
 
 
@@ -138,7 +139,7 @@ def main():
     #def dijkstras(graph_g1, start_vertex_string):
 
     unvisited_nodes =  graph_g1.get_verticies()
-    visited_nodes = {}
+    visited_nodes = []
     distances = {}
 
     for vertex_string, vertex_object in unvisited_nodes.items():
@@ -152,29 +153,34 @@ def main():
         print(f"distance: {distance}")
 
     while unvisited_nodes:
-        min_distance = 999999999
+        previous_distnace = 9999999999
         #print(type(unvisited_nodes))
         current = ""
-        for unvisited_node_vertex, vertex_details in distances.items():
+        for unvisited_node_vertex, distance in distances.items():
             print(f"unvisited_node: {unvisited_node_vertex}")
-            print(f"unvisited_node: {vertex_details}")
-            if distances[unvisited_node_vertex] < min_distance:
-                min_distance = distances[unvisited_node_vertex]
+            print(f"distance: {distance}")
+            if previous_distnace > distance:
                 current = unvisited_node_vertex
+
         
         print(f"current: {current}")
 
         for nieghbor in graph_g1.get_neighbors(current):
             print(f"current nieghbor: {nieghbor}")
 
-            #tentative_distance = distances[current] + graph_g1.get_edge(current, nieghbor)
+            tentative_distance = distances[current] + graph_g1.get_edge(current, nieghbor)
 
-        break
-
-
-
+            if tentative_distance < distances[nieghbor]:
+                distances[nieghbor] = tentative_distance
         
-        #current = graph_g1.get_vertex(start)
+        del unvisited_nodes[current]
+
+        visited_nodes.append(current)
+
+
+
+        #visited_nodes[current] = distances[current]
+    
 
 
 if __name__ == "__main__":
