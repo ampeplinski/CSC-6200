@@ -177,8 +177,7 @@ def main():
         for nieghbor in graph_g1.get_neighbors(current):
             print(f"current nieghbor: {nieghbor}")
 
-            tentative_distance = distances[current] + graph_g1.get_edge(current, nieghbor)
-
+            tentative_distance = distances[current] + int(graph_g1.get_edge(current, nieghbor)["edge_weight"])
             if tentative_distance < distances[nieghbor]:
                 distances[nieghbor] = tentative_distance
         
