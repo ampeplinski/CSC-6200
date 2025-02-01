@@ -107,12 +107,7 @@ int main(){
     cin >> endVertexString;
 
     //string unvisitedNodes[5] = {"A","B","C","D","E"};
-    std::set<string> unvisitedNodes;
-    unvisitedNodes.insert("A");
-    unvisitedNodes.insert("B");
-    unvisitedNodes.insert("C");
-    unvisitedNodes.insert("D");
-    unvisitedNodes.insert("E");
+
     std::set<string> visitedNodes;
     //string visitedNodes[5] = {};
 
@@ -160,6 +155,35 @@ int main(){
     neighbors["E"]= {"B","C","D"};
     neighbors["C"]= {"D"};
     neighbors["D"]= {"C"};
+
+    std::set<string> unvisitedNodes;
+    if (startVertexString == "A"){
+        unvisitedNodes.insert("A");
+        unvisitedNodes.insert("B");
+        unvisitedNodes.insert("C");
+        unvisitedNodes.insert("D");
+        unvisitedNodes.insert("E");
+    }
+
+    if (startVertexString == "B"){
+        unvisitedNodes.insert("E");
+        unvisitedNodes.insert("C");
+        unvisitedNodes.insert("D");
+    }
+
+    if (startVertexString == "E"){
+        unvisitedNodes.insert("B");
+        unvisitedNodes.insert("C");
+        unvisitedNodes.insert("D");
+    }
+    if (startVertexString == "C"){
+        unvisitedNodes.insert("D");
+    }
+    if (startVertexString == "D"){
+        unvisitedNodes.insert("C");
+    }
+
+    
 
     int tentativeDistance = 0;
 
@@ -209,8 +233,12 @@ int main(){
 
     }
     for (const auto& vertex : distance){
-        //    if (vertex.first == unvisitedVerticies.front()){
-        cout <<vertex.first << vertex.second << endl;
+        if (vertex.second == 999999999){
+            cout <<vertex.first << ": No Route" << endl;
+        }
+        else {
+            cout <<vertex.first << ":" << vertex.second << endl;
+        }
     }
         
 
