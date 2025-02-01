@@ -1,6 +1,7 @@
 #include <iostream>
 #include <map>
 #include <string>
+#include <list>
 using namespace std;
 
 //{'A': {'shortest_distance_form_start': 999999999, 'previous_vertex': None},
@@ -20,51 +21,141 @@ using namespace std;
 // 'D,C': {'starting_vertex': 'D', 'ending_vertex': 'C', 'edge_weight': '7'}}
 
 int main(){
+    std::map<std::string, std::map<std::string, string>> edgesFormalDescription;
+
+    edgesFormalDescription["A,B"]["starting_vertex"] = "A";
+    edgesFormalDescription["A,B"]["ending_vertex"] = "B";
+    edgesFormalDescription["A,B"]["edge_weight"] = "10";
+
+    edgesFormalDescription["B,E"]["starting_vertex"] = "B";
+    edgesFormalDescription["B,E"]["ending_vertex"] = "E";
+    edgesFormalDescription["B,E"]["edge_weight"] = "4";
+
+    edgesFormalDescription["A,E"]["starting_vertex"] = "A";
+    edgesFormalDescription["A,E"]["ending_vertex"] = "E";
+    edgesFormalDescription["A,E"]["edge_weight"] = "3";
+
+    edgesFormalDescription["E,B"]["starting_vertex"] = "E";
+    edgesFormalDescription["E,B"]["ending_vertex"] = "B";
+    edgesFormalDescription["E,B"]["edge_weight"] = "1";
+
+    edgesFormalDescription["B,C"]["starting_vertex"] = "B";
+    edgesFormalDescription["B,C"]["ending_vertex"] = "C";
+    edgesFormalDescription["B,C"]["edge_weight"] = "2";
+
+    edgesFormalDescription["E,C"]["starting_vertex"] = "E";
+    edgesFormalDescription["E,C"]["ending_vertex"] = "C";
+    edgesFormalDescription["E,C"]["edge_weight"] = "8";
+
+    edgesFormalDescription["E,D"]["starting_vertex"] = "E";
+    edgesFormalDescription["E,D"]["ending_vertex"] = "D";
+    edgesFormalDescription["E,D"]["edge_weight"] = "2";
+    
+    edgesFormalDescription["C,D"]["starting_vertex"] = "C";
+    edgesFormalDescription["C,D"]["ending_vertex"] = "D";
+    edgesFormalDescription["C,D"]["edge_weight"] = "9";
+
+    edgesFormalDescription["D,C"]["starting_vertex"] = "D";
+    edgesFormalDescription["D,C"]["ending_vertex"] = "C";
+    edgesFormalDescription["D,C"]["edge_weight"] = "7";
+    //verticiesFormalDescription
+
     std::map<std::string, std::map<std::string, string>> verticiesFormalDescription;
 
-    verticiesFormalDescription["A,B"]["starting_vertex"] = "A";
-    verticiesFormalDescription["A,B"]["ending_vertex"] = "B";
-    verticiesFormalDescription["A,B"]["edge_weight"] = "10";
+    verticiesFormalDescription["A"]["shortest_distance_form_start"] = "9999999";
+    verticiesFormalDescription["A"]["previous_vertex"] = "None";
 
-    verticiesFormalDescription["B,E"]["starting_vertex"] = "B";
-    verticiesFormalDescription["B,E"]["ending_vertex"] = "E";
-    verticiesFormalDescription["B,E"]["edge_weight"] = "4";
+    verticiesFormalDescription["B"]["shortest_distance_form_start"] = "9999999";
+    verticiesFormalDescription["B"]["previous_vertex"] = "None";
 
-    verticiesFormalDescription["A,E"]["starting_vertex"] = "A";
-    verticiesFormalDescription["A,E"]["ending_vertex"] = "E";
-    verticiesFormalDescription["A,E"]["edge_weight"] = "3";
+    verticiesFormalDescription["C"]["shortest_distance_form_start"] = "9999999";
+    verticiesFormalDescription["C"]["previous_vertex"] = "None";
 
-    verticiesFormalDescription["E,B"]["starting_vertex"] = "E";
-    verticiesFormalDescription["E,B"]["ending_vertex"] = "B";
-    verticiesFormalDescription["E,B"]["edge_weight"] = "1";
+    verticiesFormalDescription["D"]["shortest_distance_form_start"] = "9999999";
+    verticiesFormalDescription["D"]["previous_vertex"] = "None";
 
-    verticiesFormalDescription["B,C"]["starting_vertex"] = "B";
-    verticiesFormalDescription["B,C"]["ending_vertex"] = "C";
-    verticiesFormalDescription["B,C"]["edge_weight"] = "2";
+    verticiesFormalDescription["E"]["shortest_distance_form_start"] = "9999999";
+    verticiesFormalDescription["E"]["previous_vertex"] = "None";
 
-    verticiesFormalDescription["E,C"]["starting_vertex"] = "E";
-    verticiesFormalDescription["E,C"]["ending_vertex"] = "C";
-    verticiesFormalDescription["E,C"]["edge_weight"] = "8";
-
-    verticiesFormalDescription["E,D"]["starting_vertex"] = "E";
-    verticiesFormalDescription["E,D"]["ending_vertex"] = "D";
-    verticiesFormalDescription["E,D"]["edge_weight"] = "2";
-    
-    verticiesFormalDescription["C,D"]["starting_vertex"] = "C";
-    verticiesFormalDescription["C,D"]["ending_vertex"] = "D";
-    verticiesFormalDescription["C,D"]["edge_weight"] = "9";
-
-    verticiesFormalDescription["D,C"]["starting_vertex"] = "D";
-    verticiesFormalDescription["D,C"]["ending_vertex"] = "C";
-    verticiesFormalDescription["D,C"]["edge_weight"] = "7";
-
-    for (const auto& edge : verticiesFormalDescription){
-        cout << "edge: " << edge.first << endl;
-        for (auto vertex : edge.second)
-        cout << "key: " << vertex.first  << ", value: " << vertex.second << endl;
-    }
+    //for (const auto& edge : edgesFormalDescription){
+    //    cout << "edge: " << edge.first << endl;
+    //    for (auto vertex : edge.second)
+    //    cout << "key: " << vertex.first  << ", value: " << vertex.second << endl;
+    // }
     // get all info you need about an element
     string startVertexString;
     cout << "which vertex do you want to start at?: " << endl;
     cin >> startVertexString;
+
+    string endVertexString;
+    cout << "which vertex do you want to end at?: " << endl;
+    cin >> endVertexString;
+
+    string unvisitedNodes[5] = {"A","B","C","D","E"};
+
+    string visitedNodes[5] = {};
+
+    std::list<string> unvisitedVerticies = {"A","B","C","D","E"};
+
+    std::map<std::string, std::map<std::string, string>> distances;
+    //for (int n = 0; n < 5; n++){
+    //    distances[unvisitedNodes[n]]["shortest_distance_form_start"] = "9999999";
+    //}
+
+    distances["A"]["shortest_distance_form_start"] = "9999999";
+    distances["A"]["previous_vertex"] = "None";
+
+    distances["B"]["shortest_distance_form_start"] = "9999999";
+    distances["B"]["previous_vertex"] = "None";
+
+    distances["C"]["shortest_distance_form_start"] = "9999999";
+    distances["C"]["previous_vertex"] = "None";
+
+    distances["D"]["shortest_distance_form_start"] = "9999999";
+    distances["D"]["previous_vertex"] = "None";
+
+    distances["E"]["shortest_distance_form_start"] = "9999999";
+    distances["E"]["previous_vertex"] = "None";
+
+    distances[startVertexString]["shortest_distance_form_start"] = "0";
+    int previous_distance = 999999999;
+    string current;
+    while (!unvisitedVerticies.empty()){
+        // cout << "selected: "<< unvisitedVerticies.front() << endl;
+
+        std::map<std::string, string> selectedVertex = distances[unvisitedVerticies.front()];
+
+        //for (const auto& vertex : verticiesFormalDescription){
+        //    if (vertex.first == unvisitedVerticies.front()){
+        //        cout << "vertex: " << vertex.first << endl;
+        //        cout << "vertex: " << vertex.second["shortest_distance_form_start"] << endl;
+        //        for (auto details : vertex.second)
+        //            if (details.first == 'shortest_distance_form_start'){
+        //    
+        //            }
+        //            cout << "key: " << details.first  << ", value: " << details.second << endl;
+        //            if (details.first == 'shortest_distance_form_start'){
+        //
+        //            }
+        //        }
+        //    }
+
+        //for unvisited_string, unvisited_details in unvisited_nodes.items():
+        //    print(f"unvisited_node: {unvisited_string}")
+        //    print(f"distance: {distance}")
+        //    if unvisited_details['shortest_distance_form_start'] < previous_distnace:
+        //        current = unvisited_string
+        //        previous_distnace = unvisited_details['shortest_distance_form_start']
+
+        unvisitedVerticies.pop_front();
+    }
+    //for (int n = 0; n < 5; n++){
+    //   if (unvisitedNodes[n] == startVertexString){
+    //        cout << "starting Vertex: " << unvisitedNodes[n] << endl;
+    //    }
+    // }
+    //for (const auto& edge : edgesFormalDescription){
+    //    cout << "edge: " << edge.first << endl;
+    //}
+
 }
