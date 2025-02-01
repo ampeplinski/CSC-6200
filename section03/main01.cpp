@@ -139,19 +139,47 @@ int main(){
     distance["D"] = 999999999;
     distance["E"] = 999999999;
     distance[startVertexString] = 0;
+    
+    map<string, std::list<string>> neighbors;
+
+    neighbors["A"]= {"B","E"};
+    neighbors["B"]= {"A","E","C"};
+    neighbors["E"]= {"A","B","C","D"};
+    neighbors["C"]= {"B","E","D"};
+    neighbors["D"]= {"C","E"};
 
     while (unvisitedNodes.begin() != unvisitedNodes.end()){
     //for (itr = unvisitedNodes.begin(); itr != unvisitedNodes.end(); itr++){
-        cout << "selected: " << *unvisitedNodes.begin() << endl;
+        //cout << "selected: " << *unvisitedNodes.begin() << endl;
         if (distance[*unvisitedNodes.begin()] < previous_distance){
-            cout << "previous_distance: " << previous_distance << endl;
-            cout << "checking: " << distance[*unvisitedNodes.begin()] << endl;
+            //cout << "previous_distance: " << previous_distance << endl;
+            //cout << "checking: " << distance[*unvisitedNodes.begin()] << endl;
             
             current = *unvisitedNodes.begin();
             cout << "current: " << current << endl;
+            previous_distance = distance[*unvisitedNodes.begin()];
+        }
+        for (const auto& vertex : neighbors){
+            //cout << "vertex: " << vertex.first << endl;
+            if (vertex.first == *unvisitedNodes.begin()){
+                for(const string& neighbor : vertex.second){
+                    cout << "neighbor: " << neighbor << endl;
+                }
+
+            }
+
         }
         unvisitedNodes.erase(unvisitedNodes.begin());
     }
+        
+
+        //for nieghbor in graph_g1.get_neighbors(current):
+        //    print(f"current nieghbor: {nieghbor}")
+        //
+        //    tentative_distance = distances[current]["shortest_distance_form_start"] + int(graph_g1.get_edge(current, nieghbor)["edge_weight"])
+        //    if tentative_distance < distances[nieghbor]["shortest_distance_form_start"]:
+        //        distances[nieghbor]["shortest_distance_form_start"] = tentative_distance
+        
         // cout << "selected: "<< unvisitedVerticies.front() << endl;
         //unvisitedNodes
         //std::map<std::string, string> selectedVertex = distances[unvisitedVerticies.front()];
@@ -175,13 +203,6 @@ int main(){
         //            }
         //        }
         //    }
-
-        //for unvisited_string, unvisited_details in unvisited_nodes.items():
-        //    print(f"unvisited_node: {unvisited_string}")
-        //    print(f"distance: {distance}")
-        //    if unvisited_details['shortest_distance_form_start'] < previous_distnace:
-        //        current = unvisited_string
-        //        previous_distnace = unvisited_details['shortest_distance_form_start']
 
         //unvisitedVerticies.pop_front();
     //}
