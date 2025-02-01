@@ -156,10 +156,10 @@ int main(){
     map<string, std::list<string>> neighbors;
 
     neighbors["A"]= {"B","E"};
-    neighbors["B"]= {"A","E","C"};
-    neighbors["E"]= {"A","B","C","D"};
-    neighbors["C"]= {"B","E","D"};
-    neighbors["D"]= {"C","E"};
+    neighbors["B"]= {"E","C"};
+    neighbors["E"]= {"B","C","D"};
+    neighbors["C"]= {"D"};
+    neighbors["D"]= {"C"};
 
     int tentativeDistance = 0;
 
@@ -187,7 +187,7 @@ int main(){
             }
         }
             for (const auto& vertex : neighbors){
-                //cout << "vertex: " << vertex.first << endl;
+                cout << "iterating through vertex: " << vertex.first << endl;
                 if (vertex.first == current){
                     for(const string& neighbor : vertex.second){
                         cout << "neighbor: " << neighbor << endl;
