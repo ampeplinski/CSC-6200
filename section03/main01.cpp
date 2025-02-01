@@ -191,6 +191,18 @@ int main(){
     string comma = ",";
 
     current = startVertexString;
+    string previousVertex;
+    previousVertex = startVertexString;
+
+    map<string, string> previousVerticies;
+
+    previousVerticies["A"]= {};
+    previousVerticies["B"]= {};
+    previousVerticies["E"]= {};
+    previousVerticies["C"]= {};
+    previousVerticies["D"]= {};
+
+    previousVerticies[startVertexString] = "0";
 
     while (!unvisitedNodes.empty()){
         previous_distance = 999999999;
@@ -208,8 +220,10 @@ int main(){
                 current = *itr;
                 cout << "current: " << current << endl;
                 previous_distance = distance[*itr];
+                
             }
         }
+        previousVerticies[current] = previousVertex;
             for (const auto& vertex : neighbors){
                 cout << "iterating through vertex: " << vertex.first << endl;
                 if (vertex.first == current){
@@ -220,7 +234,7 @@ int main(){
                         tentativeDistance = distance[current] + edges[edgeString];
                         if (tentativeDistance < distance[neighbor]){
                             distance[neighbor] = tentativeDistance;
-                                
+                                                            
                         }
                     }
 
@@ -230,6 +244,7 @@ int main(){
             cout << "deleting :"<< current << endl;
             unvisitedNodes.erase(current);
             visitedNodes.insert(current);
+            previousVertex = current;
 
     }
     for (const auto& vertex : distance){
@@ -240,8 +255,11 @@ int main(){
             cout <<vertex.first << ":" << vertex.second << endl;
         }
     }
-        
 
+    for (const auto& vertex : previousVerticies){
+        cout <<vertex.first << ": " << vertex.second << endl;
+    }
+    
         //for nieghbor in graph_g1.get_neighbors(current):
         //    print(f"current nieghbor: {nieghbor}")
         //

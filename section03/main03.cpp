@@ -156,6 +156,16 @@ int main(){
     neighbors["C"]= {"D"};
     neighbors["D"]= {"C"};
 
+    map<string, string> previous_vertex;
+
+    previous_vertex["A"]= {};
+    previous_vertex["B"]= {};
+    previous_vertex["E"]= {};
+    previous_vertex["C"]= {};
+    previous_vertex["D"]= {};
+
+    previous_vertex[startVertexString] = "0";
+
     //start
     cout << startVertexString << "->";
     for (const auto& vertex : distance){
@@ -249,22 +259,24 @@ int main(){
 
             }
             for (itr = visitedNodes.begin(); itr != visitedNodes.end(); itr++){
-                    //cout << "selected: " << *itr << endl;
-                    if (distance[*itr] == 0){
-
-                    }
-                    else if (distance[*itr] < previous_distance){
-                        //cout << "previous_distance: " << previous_distance << endl;
-                        //cout << "checking: " << distance[*unvisitedNodes.begin()] << endl;
-                        
-                        startVertexString = *itr;
-                        //cout << "step: " << *itr << endl;
-                        cout << *itr << "->";
-                        previous_distance = distance[*itr];
-                    }
+                if (distance[*itr] == 0){
                 }
+                else if (distance[*itr] < previous_distance){
+                    //cout << "previous_distance: " << previous_distance << endl;
+                    //cout << "checking: " << distance[*unvisitedNodes.begin()] << endl;
+                    
+                    previous_vertex[*itr] = startVertexString;
+                    startVertexString = *itr;
+                    //cout << "step: " << *itr << endl;
+                    cout << *itr << "->";
+                }
+            }
 
         }
+    }
+    cout << endl;
+    for (const auto& vertex : previous_vertex){
+        cout << vertex.first << ":" << vertex.second<< endl;
     }
     //for (itr = visitedNodes.begin(); itr != visitedNodes.end(); itr++){
     //        cout << *itr;
