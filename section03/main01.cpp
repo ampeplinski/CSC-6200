@@ -138,14 +138,15 @@ int main(){
     distance["C"] = 9999999;
     distance["D"] = 9999999;
     distance["E"] = 9999999;
-    
-
-
-
+    distance[startVertexString] = 0;
 
     //while (!unvisitedNodes.empty()){
     for (itr = unvisitedNodes.begin(); itr != unvisitedNodes.end(); itr++){
         cout << "selected: " << *itr << endl;
+        if (distance[*itr] < previous_distance){
+            current = *itr;
+            cout << "current: " << current << endl;
+        }
     }
         // cout << "selected: "<< unvisitedVerticies.front() << endl;
         //unvisitedNodes
