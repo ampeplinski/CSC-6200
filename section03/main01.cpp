@@ -171,7 +171,6 @@ int main(){
     while (!unvisitedNodes.empty()){
         for (itr = unvisitedNodes.begin(); itr != unvisitedNodes.end(); itr++){
             cout << "selected: " << *unvisitedNodes.begin() << endl;
-        
             if (distance[*unvisitedNodes.begin()] < previous_distance){
                 //cout << "previous_distance: " << previous_distance << endl;
                 //cout << "checking: " << distance[*unvisitedNodes.begin()] << endl;
@@ -180,6 +179,7 @@ int main(){
                 cout << "current: " << current << endl;
                 previous_distance = distance[*unvisitedNodes.begin()];
             }
+        }
             for (const auto& vertex : neighbors){
                 //cout << "vertex: " << vertex.first << endl;
                 if (vertex.first == *unvisitedNodes.begin()){
@@ -199,12 +199,10 @@ int main(){
             }
             unvisitedNodes.erase(current);
             visitedNodes.insert(current);
-            unvisitedNodes.erase("A");
             unvisitedNodes.erase("B");
             unvisitedNodes.erase("C");
             unvisitedNodes.erase("D");
             unvisitedNodes.erase("E");
-        }
     }
     for (const auto& vertex : distance){
         //    if (vertex.first == unvisitedVerticies.front()){
