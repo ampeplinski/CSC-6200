@@ -207,7 +207,7 @@ int main(){
 
     while (!unvisitedNodes.empty()){
         previous_distance = 999999999;
-        cout << "unvisited Nodes:";
+        //cout << "unvisited Nodes:";
         for (itr = unvisitedNodes.begin(); itr != unvisitedNodes.end(); itr++){
             cout << *itr;
         }
@@ -235,9 +235,9 @@ int main(){
                         tentativeDistance = distance[current] + edges[edgeString];
                         if (tentativeDistance < distance[neighbor]){
                             distance[neighbor] = tentativeDistance;
-                            cout << "tentativeDistance :" << tentativeDistance << endl;
-                            cout << "previous Vertex :" << previousVertex << endl;
-                            cout << "current Vertex :" << current << endl;
+                            //cout << "tentativeDistance :" << tentativeDistance << endl;
+                            //cout << "previous Vertex :" << previousVertex << endl;
+                            //cout << "current Vertex :" << current << endl;
                             //if (previousVertex != current){
                             previousVerticies[neighbor] = current;
                             previousVertex = current;
