@@ -140,13 +140,14 @@ int main(){
     distance["E"] = 9999999;
     distance[startVertexString] = 0;
 
-    //while (!unvisitedNodes.empty()){
-    for (itr = unvisitedNodes.begin(); itr != unvisitedNodes.end(); itr++){
-        cout << "selected: " << *itr << endl;
-        if (distance[*itr] < previous_distance){
-            current = *itr;
+    while (unvisitedNodes.begin() != unvisitedNodes.end()){
+    //for (itr = unvisitedNodes.begin(); itr != unvisitedNodes.end(); itr++){
+        cout << "selected: " << *unvisitedNodes.begin() << endl;
+        if (distance[*unvisitedNodes.begin()] < previous_distance){
+            current = *unvisitedNodes.begin();
             cout << "current: " << current << endl;
         }
+        unvisitedNodes.erase(unvisitedNodes.begin());
     }
         // cout << "selected: "<< unvisitedVerticies.front() << endl;
         //unvisitedNodes
