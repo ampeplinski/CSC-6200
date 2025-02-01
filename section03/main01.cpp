@@ -2,6 +2,8 @@
 #include <map>
 #include <string>
 #include <list>
+#include <set>
+#include <iterator>
 using namespace std;
 
 //{'A': {'shortest_distance_form_start': 999999999, 'previous_vertex': None},
@@ -91,11 +93,17 @@ int main(){
     cout << "which vertex do you want to end at?: " << endl;
     cin >> endVertexString;
 
-    string unvisitedNodes[5] = {"A","B","C","D","E"};
+    //string unvisitedNodes[5] = {"A","B","C","D","E"};
+    std::set<string> unvisitedNodes;
+    unvisitedNodes.insert("A");
+    unvisitedNodes.insert("B");
+    unvisitedNodes.insert("C");
+    unvisitedNodes.insert("D");
+    unvisitedNodes.insert("E");
+    std::set<string> visitedNodes;
+    //string visitedNodes[5] = {};
 
-    string visitedNodes[5] = {};
-
-    std::list<string> unvisitedVerticies = {"A","B","C","D","E"};
+    //std::list<string> unvisitedVerticies = {"A","B","C","D","E"};
 
     std::map<std::string, std::map<std::string, string>> distances;
     //for (int n = 0; n < 5; n++){
@@ -120,11 +128,34 @@ int main(){
     distances[startVertexString]["shortest_distance_form_start"] = "0";
     int previous_distance = 999999999;
     string current;
-    while (!unvisitedVerticies.empty()){
+    set<string, greater<int> >:: iterator itr;
+    //set<int, greater<int> > distance;
+
+    map<string, int> distance;
+
+    distance["A"] = 9999999;
+    distance["B"] = 9999999;
+    distance["C"] = 9999999;
+    distance["D"] = 9999999;
+    distance["E"] = 9999999;
+    
+
+
+
+
+    //while (!unvisitedNodes.empty()){
+    for (itr = unvisitedNodes.begin(); itr != unvisitedNodes.end(); itr++){
+        cout << "selected: " << *itr << endl;
+    }
         // cout << "selected: "<< unvisitedVerticies.front() << endl;
-
-        std::map<std::string, string> selectedVertex = distances[unvisitedVerticies.front()];
-
+        //unvisitedNodes
+        //std::map<std::string, string> selectedVertex = distances[unvisitedVerticies.front()];
+        
+        //for (const auto& unvisitedDetails : verticiesFormalDescription){
+        //    std::map<std::string, string> selectedVertex = unvisitedDetails["shortest_distance_form_start"];
+        
+        //    if unvisitedDetails.first
+        //}
         //for (const auto& vertex : verticiesFormalDescription){
         //    if (vertex.first == unvisitedVerticies.front()){
         //        cout << "vertex: " << vertex.first << endl;
@@ -147,8 +178,8 @@ int main(){
         //        current = unvisited_string
         //        previous_distnace = unvisited_details['shortest_distance_form_start']
 
-        unvisitedVerticies.pop_front();
-    }
+        //unvisitedVerticies.pop_front();
+    //}
     //for (int n = 0; n < 5; n++){
     //   if (unvisitedNodes[n] == startVertexString){
     //        cout << "starting Vertex: " << unvisitedNodes[n] << endl;
