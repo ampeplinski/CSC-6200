@@ -133,17 +133,20 @@ int main(){
 
     map<string, int> distance;
 
-    distance["A"] = 9999999;
-    distance["B"] = 9999999;
-    distance["C"] = 9999999;
-    distance["D"] = 9999999;
-    distance["E"] = 9999999;
+    distance["A"] = 999999999;
+    distance["B"] = 999999999;
+    distance["C"] = 999999999;
+    distance["D"] = 999999999;
+    distance["E"] = 999999999;
     distance[startVertexString] = 0;
 
     while (unvisitedNodes.begin() != unvisitedNodes.end()){
     //for (itr = unvisitedNodes.begin(); itr != unvisitedNodes.end(); itr++){
         cout << "selected: " << *unvisitedNodes.begin() << endl;
         if (distance[*unvisitedNodes.begin()] < previous_distance){
+            cout << "previous_distance: " << previous_distance << endl;
+            cout << "checking: " << distance[*unvisitedNodes.begin()] << endl;
+            
             current = *unvisitedNodes.begin();
             cout << "current: " << current << endl;
         }
