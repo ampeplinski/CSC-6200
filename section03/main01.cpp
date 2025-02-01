@@ -62,6 +62,19 @@ int main(){
     edgesFormalDescription["D,C"]["edge_weight"] = "7";
     //verticiesFormalDescription
 
+    map<string, int> edges;
+
+    edges["A,B"]= 10;
+    edges["B,E"]= 4;
+    edges["A,E"]= 3;
+    edges["E,B"]= 1;
+    edges["B,C"]= 2;
+    edges["E,C"]= 8;
+    edges["E,D"]= 2;
+    edges["C,D"]= 9;
+    edges["D,C"]= 7;
+
+
     std::map<std::string, std::map<std::string, string>> verticiesFormalDescription;
 
     verticiesFormalDescription["A"]["shortest_distance_form_start"] = "9999999";
@@ -148,6 +161,11 @@ int main(){
     neighbors["C"]= {"B","E","D"};
     neighbors["D"]= {"C","E"};
 
+    int tentativeDistance = 0;
+
+    string edgeString;
+    string comma = ",";
+
     while (unvisitedNodes.begin() != unvisitedNodes.end()){
     //for (itr = unvisitedNodes.begin(); itr != unvisitedNodes.end(); itr++){
         //cout << "selected: " << *unvisitedNodes.begin() << endl;
@@ -164,6 +182,12 @@ int main(){
             if (vertex.first == *unvisitedNodes.begin()){
                 for(const string& neighbor : vertex.second){
                     cout << "neighbor: " << neighbor << endl;
+                    edgeString = current + comma + neighbor;
+                    cout << "edgeString: " << edgeString << endl;
+                    //tentativeDistance = distance[current] + edges["A,B"];
+                    //if (tentativeDistance < distance[neighbor]){
+                    //        
+                    //}
                 }
 
             }
