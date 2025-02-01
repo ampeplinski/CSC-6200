@@ -170,14 +170,14 @@ int main(){
 
     while (!unvisitedNodes.empty()){
         for (itr = unvisitedNodes.begin(); itr != unvisitedNodes.end(); itr++){
-            cout << "selected: " << *unvisitedNodes.begin() << endl;
-            if (distance[*unvisitedNodes.begin()] < previous_distance){
+            cout << "selected: " << *itr << endl;
+            if (distance[*itr] < previous_distance){
                 //cout << "previous_distance: " << previous_distance << endl;
                 //cout << "checking: " << distance[*unvisitedNodes.begin()] << endl;
                 
-                current = *unvisitedNodes.begin();
+                current = *itr;
                 cout << "current: " << current << endl;
-                previous_distance = distance[*unvisitedNodes.begin()];
+                previous_distance = distance[*itr];
             }
         }
             for (const auto& vertex : neighbors){
