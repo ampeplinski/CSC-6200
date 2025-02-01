@@ -155,91 +155,121 @@ int main(){
     neighbors["E"]= {"B","C","D"};
     neighbors["C"]= {"D"};
     neighbors["D"]= {"C"};
-
-    std::set<string> unvisitedNodes;
-    if (startVertexString == "A"){
-        unvisitedNodes.insert("A");
-        unvisitedNodes.insert("B");
-        unvisitedNodes.insert("C");
-        unvisitedNodes.insert("D");
-        unvisitedNodes.insert("E");
-    }
-
-    if (startVertexString == "B"){
-        unvisitedNodes.insert("E");
-        unvisitedNodes.insert("C");
-        unvisitedNodes.insert("D");
-    }
-
-    if (startVertexString == "E"){
-        unvisitedNodes.insert("B");
-        unvisitedNodes.insert("C");
-        unvisitedNodes.insert("D");
-    }
-    if (startVertexString == "C"){
-        unvisitedNodes.insert("D");
-    }
-    if (startVertexString == "D"){
-        unvisitedNodes.insert("C");
-    }
-
-    
-
-    int tentativeDistance = 0;
-
-    string edgeString;
-    string comma = ",";
-
-    current = startVertexString;
-
-    while (!unvisitedNodes.empty()){
-        previous_distance = 999999999;
-        cout << "unvisited Nodes:";
-        for (itr = unvisitedNodes.begin(); itr != unvisitedNodes.end(); itr++){
-            cout << *itr;
-        }
-        cout << endl;
-        for (itr = unvisitedNodes.begin(); itr != unvisitedNodes.end(); itr++){
-            //cout << "selected: " << *itr << endl;
-            if (distance[*itr] < previous_distance){
-                //cout << "previous_distance: " << previous_distance << endl;
-                //cout << "checking: " << distance[*unvisitedNodes.begin()] << endl;
-                
-                current = *itr;
-                cout << "current: " << current << endl;
-                previous_distance = distance[*itr];
-            }
-        }
-            for (const auto& vertex : neighbors){
-                cout << "iterating through vertex: " << vertex.first << endl;
-                if (vertex.first == current){
-                    for(const string& neighbor : vertex.second){
-                        cout << "neighbor: " << neighbor << endl;
-                        edgeString = current + comma + neighbor;
-                        cout << "edgeString: " << edgeString << endl;
-                        tentativeDistance = distance[current] + edges[edgeString];
-                        if (tentativeDistance < distance[neighbor]){
-                            distance[neighbor] = tentativeDistance;
-                                
-                        }
-                    }
-
-                }
-
-            }
-            cout << "deleting :"<< current << endl;
-            unvisitedNodes.erase(current);
-            visitedNodes.insert(current);
-
-    }
+    //start
     for (const auto& vertex : distance){
         if (vertex.second == 999999999){
             cout <<vertex.first << ": No Route" << endl;
         }
-        else {
-            cout <<vertex.first << ":" << vertex.second << endl;
-        }
+        else if (vertex.first == startVertexString) {
+
+            distance["A"] = 999999999;
+            distance["B"] = 999999999;
+            distance["C"] = 999999999;
+            distance["D"] = 999999999;
+            distance["E"] = 999999999;
+            distance[startVertexString] = 0;
+
+            std::set<string> unvisitedNodes;
+            if (startVertexString == "A"){
+                unvisitedNodes.insert("A");
+                unvisitedNodes.insert("B");
+                unvisitedNodes.insert("C");
+                unvisitedNodes.insert("D");
+                unvisitedNodes.insert("E");
+            }
+
+            if (startVertexString == "B"){
+                unvisitedNodes.insert("E");
+                unvisitedNodes.insert("C");
+                unvisitedNodes.insert("D");
+            }
+
+            if (startVertexString == "E"){
+                unvisitedNodes.insert("B");
+                unvisitedNodes.insert("C");
+                unvisitedNodes.insert("D");
+            }
+            if (startVertexString == "C"){
+                unvisitedNodes.insert("D");
+            }
+            if (startVertexString == "D"){
+                unvisitedNodes.insert("C");
+            }
+
+            
+
+            int tentativeDistance = 0;
+
+            string edgeString;
+            string comma = ",";
+
+            current = startVertexString;
+
+            while (!unvisitedNodes.empty()){
+                //if (!unvisitedNodes.empty()){
+                //    visitedNodes.insert(startVertexString)
+                //}
+                previous_distance = 999999999;
+                cout << "unvisited Nodes:";
+                for (itr = unvisitedNodes.begin(); itr != unvisitedNodes.end(); itr++){
+                    cout << *itr;
+                }
+                cout << endl;
+                for (itr = unvisitedNodes.begin(); itr != unvisitedNodes.end(); itr++){
+                    //cout << "selected: " << *itr << endl;
+                    if (distance[*itr] < previous_distance){
+                        //cout << "previous_distance: " << previous_distance << endl;
+                        //cout << "checking: " << distance[*unvisitedNodes.begin()] << endl;
+                        
+                        current = *itr;
+                        cout << "current: " << current << endl;
+                        previous_distance = distance[*itr];
+                    }
+                }
+                    for (const auto& vertex : neighbors){
+                        cout << "iterating through vertex: " << vertex.first << endl;
+                        if (vertex.first == current){
+                            for(const string& neighbor : vertex.second){
+                                cout << "neighbor: " << neighbor << endl;
+                                edgeString = current + comma + neighbor;
+                                cout << "edgeString: " << edgeString << endl;
+                                tentativeDistance = distance[current] + edges[edgeString];
+                                if (tentativeDistance < distance[neighbor]){
+                                    distance[neighbor] = tentativeDistance;
+                                        
+                                }
+                            }
+
+                        }
+
+                    }
+                    cout << "deleting :"<< current << endl;
+                    unvisitedNodes.erase(current);
+                    visitedNodes.insert(current);
+
+            }
+            for (itr = visitedNodes.begin(); itr != visitedNodes.end(); itr++){
+                    //cout << "selected: " << *itr << endl;
+                    if (distance[*itr] == 0){
+
+                    }
+                    else if (distance[*itr] < previous_distance){
+                        //cout << "previous_distance: " << previous_distance << endl;
+                        //cout << "checking: " << distance[*unvisitedNodes.begin()] << endl;
+                        
+                        startVertexString = *itr;
+                        cout << "step: " << current << endl;
+                        previous_distance = distance[*itr];
+                    }
+                }
+
     }
+    //for (itr = visitedNodes.begin(); itr != visitedNodes.end(); itr++){
+    //        cout << *itr;
+    //        if (endVertexString == *itr){
+    //            break;
+    //        } 
+    //    }
         
 
         //for nieghbor in graph_g1.get_neighbors(current):
