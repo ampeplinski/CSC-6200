@@ -184,16 +184,21 @@ int main(){
                     cout << "neighbor: " << neighbor << endl;
                     edgeString = current + comma + neighbor;
                     cout << "edgeString: " << edgeString << endl;
-                    //tentativeDistance = distance[current] + edges["A,B"];
-                    //if (tentativeDistance < distance[neighbor]){
-                    //        
-                    //}
+                    tentativeDistance = distance[current] + edges[edgeString];
+                    if (tentativeDistance < distance[neighbor]){
+                        distance[neighbor] = tentativeDistance;
+                            
+                    }
                 }
 
             }
 
         }
-        unvisitedNodes.erase(unvisitedNodes.begin());
+        unvisitedNodes.erase(current);
+    }
+    for (const auto& vertex : distance){
+        //    if (vertex.first == unvisitedVerticies.front()){
+        cout << vertex.second << endl;
     }
         
 
