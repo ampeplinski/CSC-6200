@@ -208,10 +208,10 @@ int main(){
     while (!unvisitedNodes.empty()){
         previous_distance = 999999999;
         //cout << "unvisited Nodes:";
-        for (itr = unvisitedNodes.begin(); itr != unvisitedNodes.end(); itr++){
-            cout << *itr;
-        }
-        cout << endl;
+        //for (itr = unvisitedNodes.begin(); itr != unvisitedNodes.end(); itr++){
+        //    cout << *itr;
+        //}
+        //cout << endl;
         for (itr = unvisitedNodes.begin(); itr != unvisitedNodes.end(); itr++){
             //cout << "selected: " << *itr << endl;
             if (distance[*itr] < previous_distance){
@@ -241,8 +241,7 @@ int main(){
                             //if (previousVertex != current){
                             previousVerticies[neighbor] = current;
                             previousVertex = current;
-                            //} 
-                            previousVertex = current;                       
+                            //}                    
                         }
                     }
 
@@ -266,6 +265,33 @@ int main(){
     for (const auto& vertex : previousVerticies){
         cout <<vertex.first << " previous Vertex :" << vertex.second << endl;
     }
+    string nextNode;
+    for (const auto& vertex : previousVerticies){
+        if (vertex.first == endVertexString){
+            cout << vertex.first<< "<--";
+            nextNode = vertex.second;
+        }
+    }
+    for (const auto& vertex : previousVerticies){
+        if (vertex.first == nextNode){
+            cout << vertex.first<< "<--";
+            nextNode = vertex.second;
+        }
+    }
+    for (const auto& vertex : previousVerticies){
+        if (vertex.first == nextNode){
+            cout << vertex.first<< "<--";
+            nextNode = vertex.second;
+        }
+    }
+    for (const auto& vertex : previousVerticies){
+        if (vertex.first == nextNode){
+            cout << vertex.first<< endl;
+            nextNode = vertex.second;
+        }
+    }
+        
+
 
     
         //for nieghbor in graph_g1.get_neighbors(current):
