@@ -219,31 +219,37 @@ int main(){
                 //cout << "checking: " << distance[*unvisitedNodes.begin()] << endl;
                 
                 current = *itr;
-                cout << "current: " << current << endl;
+                //cout << "current: " << current << endl;
                 previous_distance = distance[*itr];
                 
             }
         }
         
             for (const auto& vertex : neighbors){
-                cout << "iterating through vertex: " << vertex.first << endl;
+                //cout << "iterating through vertex: " << vertex.first << endl;
                 if (vertex.first == current){
                     for(const string& neighbor : vertex.second){
-                        cout << "neighbor: " << neighbor << endl;
+                        //cout << "neighbor: " << neighbor << endl;
                         edgeString = current + comma + neighbor;
-                        cout << "edgeString: " << edgeString << endl;
+                        //cout << "edgeString: " << edgeString << endl;
                         tentativeDistance = distance[current] + edges[edgeString];
                         if (tentativeDistance < distance[neighbor]){
                             distance[neighbor] = tentativeDistance;
-                            previousVerticies[current] = previousVertex;
-                            previousVertex = current;                             
+                            cout << "tentativeDistance :" << tentativeDistance << endl;
+                            cout << "previous Vertex :" << previousVertex << endl;
+                            cout << "current Vertex :" << current << endl;
+                            //if (previousVertex != current){
+                            previousVerticies[neighbor] = current;
+                            previousVertex = current;
+                            //} 
+                            previousVertex = current;                       
                         }
                     }
 
                 }
 
             }
-            cout << "deleting :"<< current << endl;
+            //cout << "deleting :"<< current << endl;
             unvisitedNodes.erase(current);
             visitedNodes.insert(current);
             
@@ -258,7 +264,7 @@ int main(){
         }
     }
     for (const auto& vertex : previousVerticies){
-        cout <<vertex.first << "previous Vertex :" << vertex.second << endl;
+        cout <<vertex.first << " previous Vertex :" << vertex.second << endl;
     }
 
     
