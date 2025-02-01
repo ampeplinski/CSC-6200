@@ -5,9 +5,23 @@ class Graph(object):
         """
         Initializes a new instance of the Graph class
         """
-        self._verticies_formal_description = {}
+        self._verticies_formal_description = {'A': {'shortest_distance_form_start': 999999999, 'previous_vertex': None},
+                                              'B': {'shortest_distance_form_start': 999999999, 'previous_vertex': None},
+                                              'E': {'shortest_distance_form_start': 999999999, 'previous_vertex': None},
+                                              'C': {'shortest_distance_form_start': 999999999, 'previous_vertex': None},
+                                              'D': {'shortest_distance_form_start': 999999999, 'previous_vertex': None}}
 
-        self._edges_formal_description = {}
+
+        self._edges_formal_description = {'A,B': {'starting_vertex': 'A', 'ending_vertex': 'B', 'edge_weight': '10'},
+                                          'B,E': {'starting_vertex': 'B', 'ending_vertex': 'E', 'edge_weight': '4'},
+                                          'A,E': {'starting_vertex': 'A', 'ending_vertex': 'E', 'edge_weight': '3'},
+                                          'E,B': {'starting_vertex': 'E', 'ending_vertex': 'B', 'edge_weight': '1'},
+                                          'B,C': {'starting_vertex': 'B', 'ending_vertex': 'C', 'edge_weight': '2'},
+                                          'E,C': {'starting_vertex': 'E', 'ending_vertex': 'C', 'edge_weight': '8'},
+                                          'E,D': {'starting_vertex': 'E', 'ending_vertex': 'D', 'edge_weight': '2'},
+                                          'C,D': {'starting_vertex': 'C', 'ending_vertex': 'D', 'edge_weight': '9'},
+                                          'D,C': {'starting_vertex': 'D', 'ending_vertex': 'C', 'edge_weight': '7'}}
+
 
         self.is_finished = False
         
@@ -110,7 +124,7 @@ class Graph(object):
 
 def main():
     graph_g1 = Graph()
-
+    """
     while True:
         vertex_name = input("Enter the Vertex Name: ")
         graph_g1.set_vertex(vertex_name)
@@ -128,7 +142,7 @@ def main():
         loop_again = input("Enter another vertex?(y/n): ")
         if loop_again == 'n':
             break
-
+    """
     start_vertex_string = input("which vertex do you want to start at?: ")
     selected_starting_vertex = graph_g1.get_vertex(start_vertex_string)
 
