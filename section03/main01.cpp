@@ -166,7 +166,7 @@ int main(){
     string edgeString;
     string comma = ",";
 
-    while (unvisitedNodes.begin() != unvisitedNodes.end()){
+    while (!unvisitedNodes.empty()){
     //for (itr = unvisitedNodes.begin(); itr != unvisitedNodes.end(); itr++){
         //cout << "selected: " << *unvisitedNodes.begin() << endl;
         if (distance[*unvisitedNodes.begin()] < previous_distance){
