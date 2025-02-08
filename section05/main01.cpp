@@ -15,6 +15,7 @@ int main(){
     string s2;
     cout << "type a string" << endl;
     cin >> s2;
+    cout << endl;
     vector< vector<int> > table(s1.length() + 1, vector<int>(s2.length()+ 1, 0));
     vector< vector<int> > printTable(s1.length() + 2, vector<int>(s2.length()+ 2, 0));
     
@@ -60,7 +61,10 @@ int main(){
             //cout << "type a string"<< dp[i][j] << endl;
             }
         }
-    
+    cout << endl;
+    string longestCommonSubstr;
+    longestCommonSubstr = s1.substr(endIndex - maxLength,endIndex);
+    cout << "longest common substring: "<< longestCommonSubstr << endl;
     //for (int i = 0; i < printTable.size(); i++){
     //    cout << endl;
         //if (i == 0){
