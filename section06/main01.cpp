@@ -14,16 +14,77 @@ using namespace std;
 //   / \   /  
 // 13  16 45    
 
+struct binaryTreeNode {
+    string value;
+    int frequency;
+    binaryTreeNode* llink;
+    binaryTreeNode* rlink;
+};
+
+struct simpleTreeNode {
+    string value;
+    int frequency;
+    simpleTreeNode(string v, int f) : value(v), frequency(f)
+    {}
+};
+
+class bSearchTree : public bSearchTree
+{
+    binaryTreeNode *root;
+    public:
+        bool search(const int& searchItem) const{
+        binaryTreeNode* current;
+        bool found = false;
+
+
+        if (root == NULL){
+            cout << "cant search empty tree"<< endl; 
+        }
+        //else {
+        //    current = root;
+        //    while ( curren is not Null and not found)
+        //        if(current->info is the same as the search item)
+        //            set found to true;
+        //        else    
+        //}
+        }
+        void bSearchTree::insert(const int& insertItem){
+            // stuff
+            binaryTreeNode* current;
+            binaryTreeNode* tailCurrent;
+            binaryTreeNode* newNode;
+            newNode = new binaryTreeNode;
+            newNode->info = insertItem;
+            newNode->llink = NULL;
+            newNode->rlink = NULL;
+            if(root == NULL)
+                root = newNode;
+            else{
+                current = root;
+            }
+            };
+        void deleteNode(const int& deleteItem);
+            // other things
+    private:
+        void deleteFromTree(binaryTreeNode*& p);
+
+
+};
+
 class Node {
-    Node *head;
-    public: Node() : head(NULL){}
+    Node *root;
+    public: Node() : root(NULL){}
     public: string letter_number;
     Node *Left;
     Node *Right;
+    
 
     // This works like git stash
-    void push_left(string letter_number) {
-        Node *nextNode = new Node();
+    void push(const string& insertItem) {
+        Node* current;
+        Node* tailCurrent;
+        Node* newNode;
+        Node *newNode = new Node();
         nextNode->letter_number = letter_number;
         nextNode->Left = NULL;
         nextNode->Right = NULL;
@@ -31,11 +92,11 @@ class Node {
             head = nextNode;
             return;
         }
-        //Node *iter = head;
-        //while (iter->Next) {
-        //    iter = iter->Next;
-        //}
-        //iter->Next = nextNode;
+        Node *iter = head;
+        while (iter->Next) {
+            iter = iter->Next;
+        }
+        iter->Next = nextNode;
     };
     void push_right(string letter_number) {
         Node *nextNode = new Node();
@@ -75,6 +136,15 @@ int main(){
     vector<string> linkedlist = {
         {"a/5", "b/9", "c/12", "d/13", "e/16", "f/45"}
     };
+
+    vector<simpleTreeNode> minHeap;
+    minHeap.push_back(simpleTreeNode("a",5));
+    minHeap.push_back(simpleTreeNode("b",9));
+    minHeap.push_back(simpleTreeNode("c",12));
+    minHeap.push_back(simpleTreeNode("d",13));
+    minHeap.push_back(simpleTreeNode("e",16));
+    minHeap.push_back(simpleTreeNode("f",45));
+    
     //string minHeapArray[6] = {"a/5", "b/9", "c/12", "d/13", "e/16", "f/45"};
     for (int n = 0; n < 6; n++){
         int slash = linkedlist[n].find('/');
@@ -101,18 +171,18 @@ int main(){
     current.push_left(smallest_left);
     current.push_left(smallest_right);
 
+    
 
-
-    //for (int i = 0; i < 6; i++){
-    //        if (stoi(linkedlist[i+1].substr(slash + 1)) > new_node){
-    //            if (stoi(linkedlist[i].substr(slash + 1)) < new_node) {
-    //                cout << "larger: " << linkedlist[i+1] << " smaller: " << linkedlist[i] << endl;
-    //                cout << "i: " << i << endl;
-    //                linkedlist.insert( linkedlist.begin() + i, current);
-    //                break;
-    //            }
-    //        }
-    //   }
+    for (int i = 0; i < 6; i++){
+            if (stoi(linkedlist[i+1].substr(slash + 1)) > new_node){
+                if (stoi(linkedlist[i].substr(slash + 1)) < new_node) {
+                    cout << "larger: " << linkedlist[i+1] << " smaller: " << linkedlist[i] << endl;
+                    cout << "i: " << i << endl;
+                    linkedlist.insert( linkedlist.begin() + i, to_string(new_node));
+                    break;
+                }
+            }
+        }
 
     for (int z = 0; z < 6; z++){
         cout << linkedlist[z] << endl;
