@@ -214,14 +214,17 @@ int main(){
 
     simpleTreeNode smallest_left = minHeap[0];
     simpleTreeNode smallest_right = minHeap[1];
-
+    int smallest_left_index;
+    int smallest_right_index;
     for (int n = 0; n < minHeap.size(); n++){
        cout << "selected: " << minHeap[n].frequency << endl;
     
         if (minHeap[n].frequency < smallest_left.frequency){
             smallest_left = minHeap[n];
+            int smallest_left_index = n;
             if (minHeap[n].frequency < smallest_right.frequency){
                 smallest_right = minHeap[n];
+                int smallest_right_index = n;
             }
         };
     }
@@ -242,7 +245,7 @@ int main(){
                 if (minHeap[i].frequency < new_internal_node.frequency) {
                     cout << "larger: " << minHeap[i+1].frequency << " smaller: " << minHeap[i].frequency << endl;
                     cout << "i: " << i << endl;
-                    minHeap.insert( minHeap.begin() + i, new_internal_node);
+                    minHeap.insert( minHeap.begin() + i + 1, new_internal_node);
                     break;
                 }
             }
@@ -257,18 +260,20 @@ int main(){
     //    13   14
     //   / \   / \ 
     //  16 45 5   9
+    cout<< "heap: "<< endl;
 
-    //minHeap.erase(find(minHeap.begin(), minHeap.end(), smallest_left));
-    //minHeap.erase(find(minHeap.begin(), minHeap.end(), smallest_right));
-    
-    //for (int n = 0; n < minHeap.size(); n++){
-    //    cout << minHeap[n].value << "/" << minHeap[n].frequency << endl;
-    //}
+    minHeap.erase(minHeap.begin()+ smallest_left_index);
+    minHeap.erase(minHeap.begin()+ smallest_right_index);
+    for (int n = 0; n < minHeap.size(); n++){
+        cout << minHeap[n].value << "/" << minHeap[n].frequency << endl;
+    }
+
+    cout<< "heap: "<< endl;
     //minHeap.push_back(simpleTreeNode("a",5));
-    // heapify up
-    //heapify(minHeap);
     //minHeap.push_back(simpleTreeNode("b",9));
-
+    for (int n = 0; n < minHeap.size(); n++){
+        cout << minHeap[n].value << "/" << minHeap[n].frequency << endl;
+    }
 
     //string minHeapArray[6] = {"a/5", "b/9", "c/12", "d/13", "e/16", "f/45"};
     //for (int n = 0; n < 6; n++){
