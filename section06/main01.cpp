@@ -134,20 +134,44 @@ class Node {
     
 };
 int parent (int i) {
-    cout << i << endl;
+    //cout << "parent: " << (i -1)/2 << endl;
     return (i -1)/2;
-}
-void heapify(vector<simpleTreeNode> minHeap){
+
+};
+
+//void swap_items(vector<simpleTreeNode> minHeap, int child, int parent){
+    //vector<simpleTreeNode> temp = minHeap[child];
+    //child =
+//}
+
+
+vector<simpleTreeNode> heapify(vector<simpleTreeNode> minHeap){
     int i = minHeap.size() - 1;
+    cout << i << endl;
+    //cout << minHeap[i].frequency << endl;
+    //cout << minHeap[parent(i)].frequency << endl;
+    cout << "next: " << endl;
     // Step 3 Compare the value of this child node with its parent
-    while( i  > 0 && minHeap[parent(i)].frequency > minHeap[i].frequency ){
+    while( i  > 0){
         // Step 4 If value of parent is more than child, then swap them.
+        //cout << minHeap[i].frequency << endl;
+        //cout << minHeap[parent(i)].frequency << endl;
         if (minHeap[parent(i)].frequency > minHeap[i].frequency ){
-            swap(minHeap[i], minHeap[parent(i)]);
-            i = parent(i);
-        }   
+            cout <<"swaping: "<< minHeap[i].frequency;
+            cout << " with: " << minHeap[parent(i)].frequency << endl;
+            int parent_frequency_temp = minHeap[parent(i)].frequency;
+            string parent_value_temp = minHeap[parent(i)].value;
+            minHeap[parent(i)].frequency = minHeap[i].frequency;
+            minHeap[parent(i)].value = minHeap[i].value;
+            minHeap[i].frequency = parent_frequency_temp;
+            minHeap[i].value = parent_value_temp;
+
+
+        }  
+        i = parent(i); 
         // Step 5 Reapeat step 3 & 4 until Heap properly holds.
     }
+    return minHeap;
 }
 
 int main(){
@@ -163,25 +187,29 @@ int main(){
     vector<string> linkedlist = {
         {"a/5", "b/9", "c/12", "d/13", "e/16", "f/45"}
     };
-
+    int two = 2;
+    int subtract = 1;
+    int sum = two - subtract;
+    int divide = sum /2;
+    cout << divide << endl;
     
     vector<simpleTreeNode> minHeap;
     minHeap.push_back(simpleTreeNode("a",5));
     // heapify up
     //heapify(minHeap);
     minHeap.push_back(simpleTreeNode("b",9));
-    heapify(minHeap);
+    minHeap = heapify(minHeap);
     minHeap.push_back(simpleTreeNode("c",12));
-    heapify(minHeap);
+    minHeap = heapify(minHeap);
     minHeap.push_back(simpleTreeNode("d",13));
-    heapify(minHeap);
+    minHeap = heapify(minHeap);
     minHeap.push_back(simpleTreeNode("e",16));
-    heapify(minHeap);
+    minHeap = heapify(minHeap);
     minHeap.push_back(simpleTreeNode("f",45));
-    heapify(minHeap);
+    minHeap = heapify(minHeap);
 
     for (int n = 0; n < minHeap.size(); n++){
-        cout << minHeap[n].value << minHeap[n].frequency << endl;
+        cout << minHeap[n].value << "/" << minHeap[n].frequency << endl;
     }
 
     //string minHeapArray[6] = {"a/5", "b/9", "c/12", "d/13", "e/16", "f/45"};
