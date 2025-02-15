@@ -178,8 +178,8 @@ int main(){
     //int minHeap[6] = {5, 9, 12, 13, 16, 45};
     //map<int, string> minHeaptree;
     //["5"]= {};
-    string smallest_left = "z/9999";
-    string smallest_right = "z/9999";
+    //string smallest_left = "z/9999";
+    //string smallest_right = "z/9999";
     int new_node;
     int smallest;
     int second_smallest;
@@ -212,6 +212,25 @@ int main(){
         cout << minHeap[n].value << "/" << minHeap[n].frequency << endl;
     }
 
+    simpleTreeNode smallest_left = minHeap[0];
+    simpleTreeNode smallest_right = minHeap[1];
+
+    for (int n = 0; n < minHeap.size(); n++){
+       cout << "selected: " << minHeap[n].frequency << endl;
+    
+        if (minHeap[n].frequency < smallest_left.frequency){
+            smallest_left = minHeap[n];
+            if (minHeap[n].frequency < smallest_right.frequency){
+                smallest_right = minHeap[n];
+            }
+        };
+    }
+    cout << "Two min freq nodes: " << smallest_left.frequency << ", " << smallest_right.frequency << endl;
+    int new_frequency = smallest_left.frequency + smallest_right.frequency;
+    cout << "sum: " << new_frequency << endl;
+
+    simpleTreeNode new_internal_node = simpleTreeNode("null",new_frequency);
+    
     //string minHeapArray[6] = {"a/5", "b/9", "c/12", "d/13", "e/16", "f/45"};
     //for (int n = 0; n < 6; n++){
     //    int slash = linkedlist[n].find('/');
