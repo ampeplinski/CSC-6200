@@ -122,6 +122,16 @@ class Node {
     
     
 };
+int parent (int i) {
+    return ( i -1)/2;
+}
+void heapify(vector<simpleTreeNode> maxHeap){
+    int i = maxHeap.size() - 1;
+    while( i  > 0 && maxHeap[parent(i)].frequency < maxHeap[i].frequency){
+        swap(maxHeap[i], maxHeap[parent(i)]);
+        i = parent(i);    
+    }
+}
 
 int main(){
     //int minHeap[6] = {5, 9, 12, 13, 16, 45};
@@ -137,14 +147,16 @@ int main(){
         {"a/5", "b/9", "c/12", "d/13", "e/16", "f/45"}
     };
 
+    
     vector<simpleTreeNode> minHeap;
     minHeap.push_back(simpleTreeNode("a",5));
+    // heapify up
     minHeap.push_back(simpleTreeNode("b",9));
     minHeap.push_back(simpleTreeNode("c",12));
     minHeap.push_back(simpleTreeNode("d",13));
     minHeap.push_back(simpleTreeNode("e",16));
     minHeap.push_back(simpleTreeNode("f",45));
-    
+
     //string minHeapArray[6] = {"a/5", "b/9", "c/12", "d/13", "e/16", "f/45"};
     for (int n = 0; n < 6; n++){
         int slash = linkedlist[n].find('/');
