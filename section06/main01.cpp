@@ -231,6 +231,45 @@ int main(){
 
     simpleTreeNode new_internal_node = simpleTreeNode("null",new_frequency);
     
+    //       5
+    //     /  \
+    //    9    12
+    //   / \   /  
+    // 13  16 45 
+
+    for (int i = 0; i < minHeap.size(); i++){
+            if (minHeap[i+1].frequency > new_internal_node.frequency){
+                if (minHeap[i].frequency < new_internal_node.frequency) {
+                    cout << "larger: " << minHeap[i+1].frequency << " smaller: " << minHeap[i].frequency << endl;
+                    cout << "i: " << i << endl;
+                    minHeap.insert( minHeap.begin() + i, new_internal_node);
+                    break;
+                }
+            }
+        }
+
+    for (int n = 0; n < minHeap.size(); n++){
+        cout << minHeap[n].value << "/" << minHeap[n].frequency << endl;
+    }
+    
+    //      12 
+    //     /  \
+    //    13   14
+    //   / \   / \ 
+    //  16 45 5   9
+
+    //minHeap.erase(find(minHeap.begin(), minHeap.end(), smallest_left));
+    //minHeap.erase(find(minHeap.begin(), minHeap.end(), smallest_right));
+    
+    //for (int n = 0; n < minHeap.size(); n++){
+    //    cout << minHeap[n].value << "/" << minHeap[n].frequency << endl;
+    //}
+    //minHeap.push_back(simpleTreeNode("a",5));
+    // heapify up
+    //heapify(minHeap);
+    //minHeap.push_back(simpleTreeNode("b",9));
+
+
     //string minHeapArray[6] = {"a/5", "b/9", "c/12", "d/13", "e/16", "f/45"};
     //for (int n = 0; n < 6; n++){
     //    int slash = linkedlist[n].find('/');
