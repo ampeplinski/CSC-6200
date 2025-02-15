@@ -28,18 +28,28 @@ struct simpleTreeNode {
     {}
 };
 
-class bSearchTree : public bSearchTree
+class binaryTree{
+
+};
+
+//binaryTree:binaryTree(){
+//    root = NULL;
+//}
+
+//const binaryTree& binaryTree::operator=(const binaryTree& otherTree);
+
+class bSearchTree : public binaryTree
 {
-    binaryTreeNode *root;
+    //binaryTreeNode *root;
     public:
         bool search(const int& searchItem) const{
         binaryTreeNode* current;
         bool found = false;
 
 
-        if (root == NULL){
-            cout << "cant search empty tree"<< endl; 
-        }
+        //if (root == NULL){
+        //    cout << "cant search empty tree"<< endl; 
+        //}
         //else {
         //    current = root;
         //    while ( curren is not Null and not found)
@@ -54,14 +64,14 @@ class bSearchTree : public bSearchTree
             binaryTreeNode* tailCurrent;
             binaryTreeNode* newNode;
             newNode = new binaryTreeNode;
-            newNode->info = insertItem;
+            //newNode->info = insertItem;
             newNode->llink = NULL;
             newNode->rlink = NULL;
-            if(root == NULL)
-                root = newNode;
-            else{
-                current = root;
-            }
+            //if(root == NULL)
+            //    root = newNode;
+            //else{
+            //    current = root;
+            //}
             };
         void deleteNode(const int& deleteItem);
             // other things
@@ -85,28 +95,28 @@ class Node {
         Node* tailCurrent;
         Node* newNode;
         Node *newNode = new Node();
-        nextNode->letter_number = letter_number;
-        nextNode->Left = NULL;
-        nextNode->Right = NULL;
-        if (!head){
-            head = nextNode;
-            return;
-        }
-        Node *iter = head;
-        while (iter->Next) {
-            iter = iter->Next;
-        }
-        iter->Next = nextNode;
+        //nextNode->letter_number = letter_number;
+        //nextNode->Left = NULL;
+        //nextNode->Right = NULL;
+        //if (!head){
+        //    head = nextNode;
+        //    return;
+        // }
+        // Node *iter = head;
+         // while (iter->Next) {
+        //    iter = iter->Next;
+        //}
+        //iter->Next = nextNode;
     };
     void push_right(string letter_number) {
         Node *nextNode = new Node();
         nextNode->letter_number = letter_number;
         nextNode->Left = NULL;
         nextNode->Right = NULL;
-        if (!head){
-            head = nextNode;
-            return;
-        }
+        //if (!head){
+        //    head = nextNode;
+        //    return;
+        // }
         //Node *iter = head;
         //while (iter->Next) {
         //    iter = iter->Next;
@@ -123,13 +133,18 @@ class Node {
     
 };
 int parent (int i) {
-    return ( i -1)/2;
+    return (i -1)/2;
 }
-void heapify(vector<simpleTreeNode> maxHeap){
-    int i = maxHeap.size() - 1;
-    while( i  > 0 && maxHeap[parent(i)].frequency < maxHeap[i].frequency){
-        swap(maxHeap[i], maxHeap[parent(i)]);
-        i = parent(i);    
+void heapify(vector<simpleTreeNode> minHeap){
+    int i = minHeap.size() - 1;
+    // Step 3 Compare the value of this child node with its parent
+    while( i  > 0 ){
+        // Step 4 If value of parent is more than child, then swap them.
+        if (minHeap[parent(i)].frequency > minHeap[i].frequency ){
+            swap(minHeap[i], minHeap[parent(i)]);
+            i = parent(i);
+        }   
+        // Step 5 Reapeat step 3 & 4 until Heap properly holds.
     }
 }
 
@@ -151,11 +166,21 @@ int main(){
     vector<simpleTreeNode> minHeap;
     minHeap.push_back(simpleTreeNode("a",5));
     // heapify up
+    heapify(minHeap);
     minHeap.push_back(simpleTreeNode("b",9));
+    heapify(minHeap);
     minHeap.push_back(simpleTreeNode("c",12));
+    heapify(minHeap);
     minHeap.push_back(simpleTreeNode("d",13));
+    heapify(minHeap);
     minHeap.push_back(simpleTreeNode("e",16));
+    heapify(minHeap);
     minHeap.push_back(simpleTreeNode("f",45));
+    heapify(minHeap);
+
+    for (int n = 0; n < 6; n++){
+        cout << minHeap[n].value << minHeap[n].frequency << endl;
+    }
 
     //string minHeapArray[6] = {"a/5", "b/9", "c/12", "d/13", "e/16", "f/45"};
     for (int n = 0; n < 6; n++){
@@ -180,8 +205,8 @@ int main(){
     new_node = stoi(smallest_left.substr(slash + 1)) + stoi(smallest_right.substr(slash + 1));
     cout << "new_node: " << new_node << endl;
     Node current = Node(); // make it not set
-    current.push_left(smallest_left);
-    current.push_left(smallest_right);
+    //current.push_left(smallest_left);
+    //current.push_left(smallest_right);
 
     
 
