@@ -119,6 +119,32 @@ vector<int>  preprocess(vector<int> binList){
     
 }
 
+void compressFunction(vector<int> proccessedBinList){
+    int msgAndBufferLength = proccessedBinList.size();
+    vector<vector<int>> entryMessage;
+    for (int i = 0;  i < msgAndBufferLength; i = i+ 512){
+        //cout << proccessedBinList[i];
+        for(int z =0; z< 16; z++){
+            vector<int> M;
+            for(int n = 0; n < 32; ++n){
+                M.push_back(proccessedBinList[0]);
+                proccessedBinList.erase(proccessedBinList.begin());
+            };
+            //cout << endl;
+            //for (int i = 0;  i < M.size(); i++){
+            //    cout << M[i];
+            //}
+            entryMessage.push_back(M);
+        }
+        for (int i = 0;  i < entryMessage.size(); i++){
+                for (int n = 0;  n < entryMessage[i].size(); n++){
+                cout << entryMessage[i][n];
+            }
+            cout << endl;
+            }
+    };
+
+}
 
 int main(){
     string inputvalue = "Hello Worlds";
@@ -133,8 +159,10 @@ int main(){
 
     int msgAndBufferLength = proccessedBinList.size();
     cout << msgAndBufferLength << endl;
-    for (int i = 0;  i < proccessedBinList.size(); i++){
-       cout << proccessedBinList[i];
-    }
+    //for (int i = 0;  i < proccessedBinList.size(); i++){
+    //   cout << proccessedBinList[i];
+    // }
+
+    compressFunction(proccessedBinList);
     
 }
