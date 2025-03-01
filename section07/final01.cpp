@@ -119,18 +119,37 @@ vector<int>  preprocess(vector<int> binList){
     
 }
 vector<int> rotateright(vector<int> binArray, int num){
-    for(int i = 0; i < num; i++){
-        int tmp = binArray[i+1];
-        binArray[i+1] = binArray[i];
-        for(int n = 1; n < binArray.size(); n++){
-            binArray[n] = tmp;
-            int tmp = binArray[n+1];
-            //binArray[n+1] = binArray[n];  
-            }
-          }
-    return binArray;
+    //for(int i = 0; i < num; i++){
+    //    int tmp = binArray[i+1];
+    //    binArray[i+1] = binArray[i];
+    //    for(int n = 2; n < binArray.size(); n++){
+    //        binArray[n] = tmp;
+    //        int tmp = binArray[n+1];
+    //        //binArray[n+1] = binArray[n];  
+    //       }
+    //      }
+    vector<int> result;
+    //for(auto i = num-1; i< binArray.size(); i++){
+    //    result.push_back(binArray.at(i));
+    //}
+    for(int i = 0; i < num; ++i){
+        //cout << binArray[i];
+        result.push_back(binArray[32-num+i]);
+    }
+    for(int i = num; i < 32; ++i){
+        //cout << binArray[i];
+        result.push_back(binArray[i-num]);
+    }
+    //result.push_back(binArray.at(32-num));
+    return result;
 }
 void sigma0(vector<int> wt_15){
+    cout << "before rotateright: "<< endl;
+    for (int i = 0;  i < wt_15.size(); i++){
+                cout << wt_15[i];
+    }
+    cout << endl;
+    cout << "after: "<< endl;
     vector<int> rotatedwt_15 = rotateright(wt_15, 7);
 
     for (int i = 0;  i < rotatedwt_15.size(); i++){
