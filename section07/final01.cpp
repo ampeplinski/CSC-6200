@@ -163,10 +163,6 @@ vector<int> xoring(vector<int> a,vector<int> b, vector<int>c){
     //cout << "modding:" << endl;
     for (int i = 0; i < 32; i++){
         //cout << a[i] << "+" << b[i] << "+" << c[i] << "% 2" << endl;
-        int a_iter = a[i];
-        //cout << a_iter;
-        int b_iter = b[i];
-        //cout << b_iter;
         int sum = a[i] + b[i];
         int modded = sum % 2;
         int sum2 = modded + c[i];
@@ -274,6 +270,21 @@ vector<int> sigma1(vector<int> wt_2){
     return sigma1ModdedResult;
 }
 
+vector<int> additionMod32(vector<int> w_i_16,vector<int> s0, vector<int>w_i_7, vector<int> s1){
+    vector<int> mod32result;
+    for (int i = 0; i < 32; i++){
+        int sum = w_i_16[i] + s0[i];
+        int modded = sum % 2^32;
+        int sum2 = modded + w_i_7[i];
+        int modded2 = sum2 % 2^32;
+        int sum3 = modded + s1[i];
+        int modded3 = sum3 % 2^32;
+        //cout << sum;
+        mod32result.push_back(modded3);
+    }
+    return mod32result;
+}
+
 void compressFunction(vector<int> proccessedBinList){
     int msgAndBufferLength = proccessedBinList.size();
     vector<vector<int>> entryMessage;
@@ -298,15 +309,19 @@ void compressFunction(vector<int> proccessedBinList){
             cout << endl;
             }
 
-        cout << "sigma1: " << endl;
+        //cout << "w: " << endl;
         //sigma0(entryMessage[16-15]);
         vector<int> Mt= {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
         for (int i = 16; i < 64; i++){
+            cout << "w"<<i<<": ";
             entryMessage.push_back(Mt);
             vector<int> sigma1ModdedResult = sigma1(entryMessage[i-2]);
             vector<int> sigma0ModdedResult = sigma0(entryMessage[i-15]);
-            entryMessage[i-7]
-            additionMod32(entryMessage[i-16] + sigma0ModdedResult + entryMessage[i-7] + sigma1ModdedResult);
+            vector<int> wn = additionMod32(entryMessage[i-16], sigma0ModdedResult, entryMessage[i-7], sigma1ModdedResult);
+            for (int i = 0;  i < wn.size(); i++){
+                       cout << wn[i];
+            }
+            cout <<endl;
             //vector<int> Wt = sigma1(entryMessage[i-2]) + entryMessage[i-7] + sigma0(entryMessage[i-15]) + entryMessage[i-16]
         }      
     };
