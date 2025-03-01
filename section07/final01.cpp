@@ -9,7 +9,7 @@ vector<int> strToBinary(string inputValue){
     vector<int> binList;
     for (std::size_t i = 0;  i < inputValue.size(); ++i){
         string byte = bitset<8>(inputValue[i]).to_string();
-        //cout << byte;
+        cout << byte << endl;
         for (char c : byte){
             if (c == '1'){
                 binList.push_back(1);
@@ -81,7 +81,7 @@ vector<int>  preprocess(vector<int> binList){
     cout << "k: "<< k << endl;
     //int k = 351;
     // l + 1 + k = 448 mod 512
-    vector<int> lengthbits = decToBinary(120000);
+    vector<int> lengthbits = decToBinary(messageLength);
     int checker = messageLength + 1 + k + lengthbits.size();
     cout << "checker: " << checker << endl;
     binList.push_back(1);
@@ -119,6 +119,16 @@ vector<int>  preprocess(vector<int> binList){
     
 }
 
+vector<int> sigma0(vector<int> wt_15){
+    for (int n = 0;  n < wt_15[i].size(); n++){
+                cout << wt_15[i];
+    }
+}
+
+vector<int> sigma1(vector<int> wt_2){
+    //wt_2
+}
+
 void compressFunction(vector<int> proccessedBinList){
     int msgAndBufferLength = proccessedBinList.size();
     vector<vector<int>> entryMessage;
@@ -142,12 +152,25 @@ void compressFunction(vector<int> proccessedBinList){
             }
             cout << endl;
             }
+        for (int i = 16; i < 64; i++){
+            sigma0(entryMessage[i-15]);
+            //vector<int> Wt = sigma1(entryMessage[i-2]) + entryMessage[i-7] + sigma0(entryMessage[i-15]) + entryMessage[i-16]
+        }      
     };
 
 }
 
+//H0 = "01101010 00001001 11100110 01100111"
+//H1 = "10111011 01100111 10101110 10000101"
+//H2 = "00111100 01101110 11110011 01110010"
+//H3 = "10100101 01001111 11110101 00111010"
+//H4 = "01010001 00001110 01010010 01111111"
+//H5 = "10011011 00000101 01101000 10001100"
+//H6 = "00011111 10000011 11011001 10101011"
+//H7 = "01011011 11100000 11001101 00011001"
+
 int main(){
-    string inputvalue = "Hello Worlds";
+    string inputvalue = "hello world";
     vector<int> binList = strToBinary(inputvalue);
     int messageLength = binList.size();
     cout << messageLength << endl;
