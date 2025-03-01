@@ -119,13 +119,14 @@ vector<int>  preprocess(vector<int> binList){
     
 }
 
-vector<int> sigma0(vector<int> wt_15){
-    for (int n = 0;  n < wt_15[i].size(); n++){
+void sigma0(vector<int> wt_15){
+    for (int i = 0;  i < wt_15.size(); i++){
                 cout << wt_15[i];
     }
+    cout << endl;
 }
 
-vector<int> sigma1(vector<int> wt_2){
+void sigma1(vector<int> wt_2){
     //wt_2
 }
 
@@ -152,7 +153,12 @@ void compressFunction(vector<int> proccessedBinList){
             }
             cout << endl;
             }
+
+        cout << "sigma0: " << endl;
+        //sigma0(entryMessage[16-15]);
+        vector<int> Mt= {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
         for (int i = 16; i < 64; i++){
+            entryMessage.push_back(Mt);
             sigma0(entryMessage[i-15]);
             //vector<int> Wt = sigma1(entryMessage[i-2]) + entryMessage[i-7] + sigma0(entryMessage[i-15]) + entryMessage[i-16]
         }      
