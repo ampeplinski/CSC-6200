@@ -157,47 +157,121 @@ vector<int> shiftright(vector<int> binArray, int num){
     return result;
 }
 
-void sigma0(vector<int> wt_15){
-    cout << "before rotateright 7: "<< endl;
-    for (int i = 0;  i < wt_15.size(); i++){
-                cout << wt_15[i];
+vector<int> xoring(vector<int> a,vector<int> b, vector<int>c){
+    vector<int> xoringresult;
+    //cout << a[0];
+    //cout << "modding:" << endl;
+    for (int i = 0; i < 32; i++){
+        //cout << a[i] << "+" << b[i] << "+" << c[i] << "% 2" << endl;
+        int a_iter = a[i];
+        //cout << a_iter;
+        int b_iter = b[i];
+        //cout << b_iter;
+        int sum = a[i] + b[i];
+        int modded = sum % 2;
+        int sum2 = modded + c[i];
+        int modded2 = sum2 % 2;
+        //cout << sum;
+        xoringresult.push_back(modded2);
     }
-    cout << endl;
-    cout << "after: "<< endl;
-    vector<int> rotatedwt_15_7 = rotateright(wt_15, 7);
-    
-    for (int i = 0;  i < rotatedwt_15_7.size(); i++){
-                cout << rotatedwt_15_7[i];
-    }
-    cout << endl;
-    cout << "before rotateright 18: "<< endl;
-    for (int i = 0;  i < wt_15.size(); i++){
-                cout << wt_15[i];
-    }
-    cout << endl;
-    cout << "after: "<< endl;
-    vector<int> rotatedwt_15_18 = rotateright(wt_15, 18);
-    
-    for (int i = 0;  i < rotatedwt_15_18.size(); i++){
-                cout << rotatedwt_15_18[i];
-    }
-    cout << endl;
-    cout << "before shiftright 3: "<< endl;
-    for (int i = 0;  i < wt_15.size(); i++){
-                cout << wt_15[i];
-    }
-    cout << endl;
-    cout << "after: "<< endl;
-    vector<int> shiftedwt_15_3 = shiftright(wt_15, 3);
-    
-    for (int i = 0;  i < shiftedwt_15_3.size(); i++){
-                cout << shiftedwt_15_3[i];
-    }
-    cout << endl;
+    return xoringresult;
+
 }
 
-void sigma1(vector<int> wt_2){
-    //wt_2
+vector<int> sigma0(vector<int> wt_15){
+    //cout << "before rotateright 7: "<< endl;
+    //for (int i = 0;  i < wt_15.size(); i++){
+    //           cout << wt_15[i];
+    //}
+    //cout << endl;
+    //cout << "after: "<< endl;
+    vector<int> rotatedwt_15_7 = rotateright(wt_15, 7);
+    
+    //for (int i = 0;  i < rotatedwt_15_7.size(); i++){
+    //            cout << rotatedwt_15_7[i];
+    //}
+    //cout << endl;
+    //cout << "before rotateright 18: "<< endl;
+    //for (int i = 0;  i < wt_15.size(); i++){
+    //            cout << wt_15[i];
+    //}
+    //cout << endl;
+    //cout << "after: "<< endl;
+    vector<int> rotatedwt_15_18 = rotateright(wt_15, 18);
+    
+    //for (int i = 0;  i < rotatedwt_15_18.size(); i++){
+    //            cout << rotatedwt_15_18[i];
+    //}
+    //cout << endl;
+    //cout << "before shiftright 3: "<< endl;
+    //for (int i = 0;  i < wt_15.size(); i++){
+    //            cout << wt_15[i];
+    // }
+    //cout << endl;
+    //cout << "after: "<< endl;
+    vector<int> shiftedwt_15_3 = shiftright(wt_15, 3);
+    
+    //for (int i = 0;  i < shiftedwt_15_3.size(); i++){
+    //            cout << shiftedwt_15_3[i];
+    //}
+    //cout << endl;
+
+    vector<int> sigma0ModdedResult = xoring(rotatedwt_15_7,rotatedwt_15_18, shiftedwt_15_3);
+    //cout << "after modding: "<< endl;
+    
+    //for (int i = 0;  i < sigma0ModdedResult.size(); i++){
+    //            cout << sigma0ModdedResult[i];
+    //}
+    //cout << endl;
+    return sigma0ModdedResult;
+}
+
+vector<int> sigma1(vector<int> wt_2){
+    //cout << "before rotateright 17: "<< endl;
+    //for (int i = 0;  i < wt_2.size(); i++){
+    //            cout << wt_2[i];
+    //}
+    //cout << endl;
+    //cout << "after: "<< endl;
+    vector<int> rotatedwt_2_17 = rotateright(wt_2, 17);
+    
+    //for (int i = 0;  i < rotatedwt_2_17.size(); i++){
+    //            cout << rotatedwt_2_17[i];
+    //}
+    //cout << endl;
+    //cout << "before rotateright 19: "<< endl;
+    //for (int i = 0;  i < wt_2.size(); i++){
+    //            cout << wt_2[i];
+    //}
+    //cout << endl;
+    //cout << "after: "<< endl;
+    vector<int> rotatedwt_2_19 = rotateright(wt_2, 19);
+    
+    //for (int i = 0;  i < rotatedwt_2_19.size(); i++){
+    //            cout << rotatedwt_2_19[i];
+    //}
+    //cout << endl;
+    //cout << "before shiftright 10: "<< endl;
+    //for (int i = 0;  i < wt_2.size(); i++){
+    //            cout << wt_2[i];
+    //}
+    //cout << endl;
+    //cout << "after: "<< endl;
+    vector<int> shiftedwt_2_10 = shiftright(wt_2, 10);
+    
+    //for (int i = 0;  i < shiftedwt_2_10.size(); i++){
+    //            cout << shiftedwt_2_10[i];
+    //}
+    //cout << endl;
+
+    vector<int> sigma1ModdedResult = xoring(rotatedwt_2_17,rotatedwt_2_19, shiftedwt_2_10);
+    //cout << "after modding: "<< endl;
+    
+    //for (int i = 0;  i < sigma1ModdedResult.size(); i++){
+    //            cout << sigma1ModdedResult[i];
+    //}
+    //cout << endl;
+    return sigma1ModdedResult;
 }
 
 void compressFunction(vector<int> proccessedBinList){
@@ -224,12 +298,15 @@ void compressFunction(vector<int> proccessedBinList){
             cout << endl;
             }
 
-        cout << "sigma0: " << endl;
+        cout << "sigma1: " << endl;
         //sigma0(entryMessage[16-15]);
         vector<int> Mt= {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
         for (int i = 16; i < 64; i++){
             entryMessage.push_back(Mt);
-            sigma0(entryMessage[i-15]);
+            vector<int> sigma1ModdedResult = sigma1(entryMessage[i-2]);
+            vector<int> sigma0ModdedResult = sigma0(entryMessage[i-15]);
+            entryMessage[i-7]
+            additionMod32(entryMessage[i-16] + sigma0ModdedResult + entryMessage[i-7] + sigma1ModdedResult);
             //vector<int> Wt = sigma1(entryMessage[i-2]) + entryMessage[i-7] + sigma0(entryMessage[i-15]) + entryMessage[i-16]
         }      
     };
