@@ -35,6 +35,42 @@ vector<int> strToBinary(string inputValue){
 
 }
 
+vector<int> decToBinary32(int num){
+    int binaryNum[32];
+    vector<int> reversedBin;
+
+    int i = 0;
+    while (num > 0){
+        binaryNum[i] = num % 2;
+        num = num / 2;
+        i++;
+    };
+
+    cout << sizeof(binaryNum)<< endl;
+    //for (int i = 0;  i < sizeof(binaryNum); ++i){
+    //    cout << binaryNum[i];
+    //};
+    for (int n = 0;  n < i; ++n){
+        //cout << binaryNum[n];
+        reversedBin.insert(reversedBin.begin(), binaryNum[n]);
+    };
+
+    while (reversedBin.size() < 32){
+        reversedBin.insert(reversedBin.begin(), 0);
+    }
+    //for ( int j = i -1; j >= 0; j--){
+    //    cout<< binaryNum[j];
+    //    reversedBin[]
+    //}
+    //for (int i = 0;  i < reversedBin.size(); ++i){
+    //    cout << reversedBin[i];
+    //};
+    //cout << endl;
+    cout << reversedBin.size() << endl;
+
+    return reversedBin;
+}
+
 vector<int> decToBinary(int num){
     int binaryNum[16];
     vector<int> reversedBin;
@@ -69,6 +105,19 @@ vector<int> decToBinary(int num){
     cout << reversedBin.size() << endl;
 
     return reversedBin;
+}
+
+vector<int> decToBin(int num){
+    int iterator;
+    vector<int> binarynum;
+
+    for(int i = 0; i < 32; i++){
+        cout << num % 2<< endl;
+        binarynum.push_back(num % 2);
+        num = num/2;
+        cout << num << endl;
+    }
+    return binarynum;
 }
 
 vector<int>  preprocess(vector<int> binList){
@@ -380,22 +429,27 @@ void compressFunction(vector<int> proccessedBinList){
             cout << s0_decimal;
             cout << endl << "+ " << endl;
             cout << "w" << i-7 << ": ";
-            for (int n = 0;  n < entryMessage[i-7].size(); n++){
-                       cout << entryMessage[i-7][n];
-            }
+            //for (int n = 0;  n < entryMessage[i-7].size(); n++){
+            //           cout << entryMessage[i-7][n];
+            //}
+            int w_i_7_decimal = binToDecimal(entryMessage[i-7]);
+            cout << w_i_7_decimal;
             cout << endl << "+ " << endl;
             cout<<"s0: ";
-            for (int n = 0;  n < sigma1ModdedResult.size(); n++){
-                       cout << sigma1ModdedResult[n];
-            }
-            int sum = w_i_16_decimal + s0_decimal;
+            //for (int n = 0;  n < sigma1ModdedResult.size(); n++){
+            //           cout << sigma1ModdedResult[n];
+            //}
+            int s1_decimal = binToDecimal(sigma1ModdedResult);
+            cout << s1_decimal;
+            int sum = w_i_16_decimal + s0_decimal + w_i_7_decimal + s1_decimal;
             //vector<int> addedbin = decToBinary(sum);
             //vector<int> wn = additionMod32(entryMessage[i-16], sigma0ModdedResult, entryMessage[i-7], sigma1ModdedResult);
-            cout<< endl<< sum;
-            //cout << "w"<<i<<":";
-            //for (int n = 0;  n < wn.size(); n++){
-            //           cout << wn[n];
-            //}
+            vector<int> wn = decToBinary32(sum);
+            //cout<< endl<< sum;
+            cout << "w"<<i<<":";
+            for (int n = 0;  n < wn.size(); n++){
+                       cout << wn[n];
+            }
             cout <<endl;
             //vector<int> Wt = sigma1(entryMessage[i-2]) + entryMessage[i-7] + sigma0(entryMessage[i-15]) + entryMessage[i-16]
         }      
