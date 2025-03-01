@@ -10,7 +10,7 @@ vector<int> strToBinary(string inputValue){
     vector<int> binList;
     for (std::size_t i = 0;  i < inputValue.size(); ++i){
         string byte = bitset<8>(inputValue[i]).to_string();
-        cout << byte << endl;
+        //cout << byte << endl;
         for (char c : byte){
             if (c == '1'){
                 binList.push_back(1);
@@ -35,7 +35,7 @@ vector<int> strToBinary(string inputValue){
 
 }
 
-vector<int> decToBinary32(int num){
+vector<int> decToBinary32(long int num){
     int binaryNum[32];
     vector<int> reversedBin;
 
@@ -46,7 +46,7 @@ vector<int> decToBinary32(int num){
         i++;
     };
 
-    cout << sizeof(binaryNum)<< endl;
+    //cout << sizeof(binaryNum)<< endl;
     //for (int i = 0;  i < sizeof(binaryNum); ++i){
     //    cout << binaryNum[i];
     //};
@@ -66,7 +66,7 @@ vector<int> decToBinary32(int num){
     //    cout << reversedBin[i];
     //};
     //cout << endl;
-    cout << reversedBin.size() << endl;
+    //cout << reversedBin.size() << endl;
 
     return reversedBin;
 }
@@ -82,7 +82,7 @@ vector<int> decToBinary(int num){
         i++;
     };
 
-    cout << sizeof(binaryNum)<< endl;
+    //cout << sizeof(binaryNum)<< endl;
     //for (int i = 0;  i < sizeof(binaryNum); ++i){
     //    cout << binaryNum[i];
     //};
@@ -102,7 +102,7 @@ vector<int> decToBinary(int num){
     //    cout << reversedBin[i];
     //};
     //cout << endl;
-    cout << reversedBin.size() << endl;
+    //cout << reversedBin.size() << endl;
 
     return reversedBin;
 }
@@ -112,10 +112,10 @@ vector<int> decToBin(int num){
     vector<int> binarynum;
 
     for(int i = 0; i < 32; i++){
-        cout << num % 2<< endl;
+        //cout << num % 2<< endl;
         binarynum.push_back(num % 2);
         num = num/2;
-        cout << num << endl;
+        //cout << num << endl;
     }
     return binarynum;
 }
@@ -338,8 +338,8 @@ vector<int> additionMod32(vector<int> w_i_16,vector<int> s0, vector<int>w_i_7, v
     return mod32result;
 }
 
-int binToDecimal(vector<int> number){
-    cout<< endl;
+long int binToDecimal(vector<int> number){
+    //cout<< endl;
     // so if i do int decimal; then i get a strange number
     // but if i use int decimal=0; its correct
     int decimal = 0;
@@ -409,43 +409,50 @@ void compressFunction(vector<int> proccessedBinList){
         //cout << "w: " << endl;
         //sigma0(entryMessage[16-15]);
         vector<int> Mt= {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
-        for (int i = 16; i < 17; i++){
+        for (int i = 16; i < 18; i++){
             
             entryMessage.push_back(Mt);
             vector<int> sigma1ModdedResult = sigma1(entryMessage[i-2]);
             vector<int> sigma0ModdedResult = sigma0(entryMessage[i-15]);
             cout << "w" << i-16 << ": ";
-            //for (int n = 0;  n < entryMessage[i-16].size(); n++){
-            //           cout << entryMessage[i-16][n];
-            //}
-            int w_i_16_decimal = binToDecimal(entryMessage[i-16]);
+            for (int n = 0;  n < entryMessage[i-16].size(); n++){
+                       cout << entryMessage[i-16][n];
+            }
+            cout << endl;
+            long int w_i_16_decimal = binToDecimal(entryMessage[i-16]);
             cout << w_i_16_decimal;
             cout << endl << "+ " << endl;
             cout << "s0: ";
             for (int n = 0;  n < sigma0ModdedResult.size(); n++){
                        cout << sigma0ModdedResult[n];
             }
-            int s0_decimal = binToDecimal(sigma0ModdedResult);
+            cout << endl;
+            long int s0_decimal = binToDecimal(sigma0ModdedResult);
             cout << s0_decimal;
             cout << endl << "+ " << endl;
             cout << "w" << i-7 << ": ";
-            //for (int n = 0;  n < entryMessage[i-7].size(); n++){
-            //           cout << entryMessage[i-7][n];
-            //}
-            int w_i_7_decimal = binToDecimal(entryMessage[i-7]);
+            for (int n = 0;  n < entryMessage[i-7].size(); n++){
+                       cout << entryMessage[i-7][n];
+            }
+            cout << endl;
+            long int w_i_7_decimal = binToDecimal(entryMessage[i-7]);
             cout << w_i_7_decimal;
             cout << endl << "+ " << endl;
             cout<<"s0: ";
-            //for (int n = 0;  n < sigma1ModdedResult.size(); n++){
-            //           cout << sigma1ModdedResult[n];
-            //}
-            int s1_decimal = binToDecimal(sigma1ModdedResult);
-            cout << s1_decimal;
-            int sum = w_i_16_decimal + s0_decimal + w_i_7_decimal + s1_decimal;
+            for (int n = 0;  n < sigma1ModdedResult.size(); n++){
+                       cout << sigma1ModdedResult[n];
+            }
+            cout << endl;
+            long int s1_decimal = binToDecimal(sigma1ModdedResult);
+            cout << s1_decimal <<endl;
+            // I exceeded the maximum number the integer can store
+            long int sum = w_i_16_decimal + s0_decimal + w_i_7_decimal + s1_decimal;
+            cout<< "sum: "<< sum;
             //vector<int> addedbin = decToBinary(sum);
             //vector<int> wn = additionMod32(entryMessage[i-16], sigma0ModdedResult, entryMessage[i-7], sigma1ModdedResult);
             vector<int> wn = decToBinary32(sum);
             //cout<< endl<< sum;
+            cout << endl;
             cout << "w"<<i<<":";
             for (int n = 0;  n < wn.size(); n++){
                        cout << wn[n];
