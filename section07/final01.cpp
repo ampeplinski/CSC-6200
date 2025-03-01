@@ -3,6 +3,7 @@
 #include <string>
 #include <iostream>
 #include <vector>
+#include <cmath>
 using namespace std;
 
 vector<int> strToBinary(string inputValue){
@@ -273,18 +274,65 @@ vector<int> sigma1(vector<int> wt_2){
 vector<int> additionMod32(vector<int> w_i_16,vector<int> s0, vector<int>w_i_7, vector<int> s1){
     vector<int> mod32result;
     for (int i = 0; i < 32; i++){
-        int sum = w_i_16[i] + s0[i];
-        int modded = sum % 2^32;
-        int sum2 = modded + w_i_7[i];
-        int modded2 = sum2 % 2^32;
-        int sum3 = modded + s1[i];
-        int modded3 = sum3 % 2^32;
-        //cout << sum;
+        int sum = w_i_16[i] + s0[i] + w_i_7[i] + s1[i];
+        int modded3 = sum % (32);
+
+        //int modded4 = modded3 % 2;
+        ////int modded = sum % (2^32);
+        //int sum2 = modded + w_i_7[i];
+        //int modded2 = sum2 % (2^32);
+        //int sum3 = modded + s1[i];
+        //int modded3 = sum3 % (2^32);
+        //cout << modded4;
         mod32result.push_back(modded3);
     }
     return mod32result;
 }
 
+int binToDecimal(vector<int> number){
+    cout<< endl;
+    // so if i do int decimal; then i get a strange number
+    // but if i use int decimal=0; its correct
+    int decimal = 0;
+    //string stringa = number.to_string()
+
+    //stringstream binary;
+    //std::string str(number.begin(), number.end());
+    //for (int i : number){
+    //    binary << i;
+    //}
+    //cout << "string: " << str;
+
+    int total = 0;
+    int iterator = 31;
+    for (int i = 0; i < 32; i++){
+        if (number[i]== 1){
+            int sum = pow(2, iterator);
+
+            //cout << 1 * sum;
+            decimal += 1 * sum;;
+        }
+        if (number[i]== 0){
+            int sum = pow(2, iterator);
+            //cout << 0 * sum;
+            decimal += 0 * sum;
+        }
+        //cout <<number[i]<<"* 2" << "^"<< iterator <<endl;
+        iterator--;
+        //cout<< endl;
+    }
+    //auto rit = str.rbegin();
+    //unsigned bit =1;
+    //unsigned decimal = 0;
+    //while (rit != str.rend()){
+    //for (int i = 0; )
+    //    if(*(rit++)== '1'){
+    //        decimal += bit;
+    //    }
+    //    bit <<= 1;
+    //    }
+    return decimal;
+}
 void compressFunction(vector<int> proccessedBinList){
     int msgAndBufferLength = proccessedBinList.size();
     vector<vector<int>> entryMessage;
@@ -312,15 +360,42 @@ void compressFunction(vector<int> proccessedBinList){
         //cout << "w: " << endl;
         //sigma0(entryMessage[16-15]);
         vector<int> Mt= {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
-        for (int i = 16; i < 64; i++){
-            cout << "w"<<i<<": ";
+        for (int i = 16; i < 17; i++){
+            
             entryMessage.push_back(Mt);
             vector<int> sigma1ModdedResult = sigma1(entryMessage[i-2]);
             vector<int> sigma0ModdedResult = sigma0(entryMessage[i-15]);
-            vector<int> wn = additionMod32(entryMessage[i-16], sigma0ModdedResult, entryMessage[i-7], sigma1ModdedResult);
-            for (int i = 0;  i < wn.size(); i++){
-                       cout << wn[i];
+            cout << "w" << i-16 << ": ";
+            //for (int n = 0;  n < entryMessage[i-16].size(); n++){
+            //           cout << entryMessage[i-16][n];
+            //}
+            int w_i_16_decimal = binToDecimal(entryMessage[i-16]);
+            cout << w_i_16_decimal;
+            cout << endl << "+ " << endl;
+            cout << "s0: ";
+            for (int n = 0;  n < sigma0ModdedResult.size(); n++){
+                       cout << sigma0ModdedResult[n];
             }
+            int s0_decimal = binToDecimal(sigma0ModdedResult);
+            cout << s0_decimal;
+            cout << endl << "+ " << endl;
+            cout << "w" << i-7 << ": ";
+            for (int n = 0;  n < entryMessage[i-7].size(); n++){
+                       cout << entryMessage[i-7][n];
+            }
+            cout << endl << "+ " << endl;
+            cout<<"s0: ";
+            for (int n = 0;  n < sigma1ModdedResult.size(); n++){
+                       cout << sigma1ModdedResult[n];
+            }
+            int sum = w_i_16_decimal + s0_decimal;
+            //vector<int> addedbin = decToBinary(sum);
+            //vector<int> wn = additionMod32(entryMessage[i-16], sigma0ModdedResult, entryMessage[i-7], sigma1ModdedResult);
+            cout<< endl<< sum;
+            //cout << "w"<<i<<":";
+            //for (int n = 0;  n < wn.size(); n++){
+            //           cout << wn[n];
+            //}
             cout <<endl;
             //vector<int> Wt = sigma1(entryMessage[i-2]) + entryMessage[i-7] + sigma0(entryMessage[i-15]) + entryMessage[i-16]
         }      
