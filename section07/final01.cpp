@@ -143,17 +143,55 @@ vector<int> rotateright(vector<int> binArray, int num){
     //result.push_back(binArray.at(32-num));
     return result;
 }
+
+vector<int> shiftright(vector<int> binArray, int num){
+    vector<int> result;
+    for(int i = 0; i < num; ++i){
+        //cout << binArray[i];
+        result.push_back(0);
+    }
+    for(int i = num; i < 32; ++i){
+        //cout << binArray[i];
+        result.push_back(binArray[i-num]);
+    }
+    return result;
+}
+
 void sigma0(vector<int> wt_15){
-    cout << "before rotateright: "<< endl;
+    cout << "before rotateright 7: "<< endl;
     for (int i = 0;  i < wt_15.size(); i++){
                 cout << wt_15[i];
     }
     cout << endl;
     cout << "after: "<< endl;
-    vector<int> rotatedwt_15 = rotateright(wt_15, 7);
-
-    for (int i = 0;  i < rotatedwt_15.size(); i++){
-                cout << rotatedwt_15[i];
+    vector<int> rotatedwt_15_7 = rotateright(wt_15, 7);
+    
+    for (int i = 0;  i < rotatedwt_15_7.size(); i++){
+                cout << rotatedwt_15_7[i];
+    }
+    cout << endl;
+    cout << "before rotateright 18: "<< endl;
+    for (int i = 0;  i < wt_15.size(); i++){
+                cout << wt_15[i];
+    }
+    cout << endl;
+    cout << "after: "<< endl;
+    vector<int> rotatedwt_15_18 = rotateright(wt_15, 18);
+    
+    for (int i = 0;  i < rotatedwt_15_18.size(); i++){
+                cout << rotatedwt_15_18[i];
+    }
+    cout << endl;
+    cout << "before shiftright 3: "<< endl;
+    for (int i = 0;  i < wt_15.size(); i++){
+                cout << wt_15[i];
+    }
+    cout << endl;
+    cout << "after: "<< endl;
+    vector<int> shiftedwt_15_3 = shiftright(wt_15, 3);
+    
+    for (int i = 0;  i < shiftedwt_15_3.size(); i++){
+                cout << shiftedwt_15_3[i];
     }
     cout << endl;
 }
