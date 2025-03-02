@@ -837,40 +837,56 @@ void compressFunction(vector<int> proccessedBinList){
         //     }
         //     cout <<endl;
         h = g;
+        // cout << "h:";
+        // for (int n = 0;  n < h.size(); n++){
+        //             cout << h[n];
+        // }
+        // cout << endl;
         g = f;
+        // cout << "g:";
+        // for (int n = 0;  n < g.size(); n++){
+        //             cout << g[n];
+        // }
+        // cout << endl;      
+        f = e;
+        // cout << "f:";
+        // for (int n = 0;  n < f.size(); n++){
+        //             cout << f[n];
+        // }
+        // cout << endl;
         long long int t1_decimal = binToDecimal(t1);
         long long int t2_decimal = binToDecimal(t2);
         long long int d_decimal = binToDecimal(d);
         e = decToBinary32(d_decimal + t1_decimal);
-        cout << "e:";
-        for (int n = 0;  n < e.size(); n++){
-                    cout << e[n];
-        }
-        cout << endl;
+        // cout << "e:";
+        // for (int n = 0;  n < e.size(); n++){
+        //             cout << e[n];
+        // }
+        // cout << endl;
         d = c;
-        cout << "d:";
-        for (int n = 0;  n < d.size(); n++){
-                    cout << d[n];
-        }
-        cout << endl;
+        // cout << "d:";
+        // for (int n = 0;  n < d.size(); n++){
+        //             cout << d[n];
+        // }
+        // cout << endl;
         c = b;
-        cout << "c:";
-        for (int n = 0;  n < c.size(); n++){
-                    cout << c[n];
-        }
-        cout << endl;
+        // cout << "c:";
+        // for (int n = 0;  n < c.size(); n++){
+        //             cout << c[n];
+        // }
+        // cout << endl;
         b = a;
-        cout << "b:";
-        for (int n = 0;  n < b.size(); n++){
-                    cout << b[n];
-        }
-        cout <<endl;
+        // cout << "b:";
+        // for (int n = 0;  n < b.size(); n++){
+        //             cout << b[n];
+        // }
+        // cout <<endl;
         a = decToBinary32(t1_decimal + t2_decimal);
-        cout << "a:";
-        for (int n = 0;  n < a.size(); n++){
-                    cout << a[n];
-        }
-        cout <<endl;
+        // cout << "a:";
+        // for (int n = 0;  n < a.size(); n++){
+        //             cout << a[n];
+        // }
+        // cout <<endl;
     }
     //return entryMessage;
 }
