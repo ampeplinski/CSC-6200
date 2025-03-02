@@ -6,6 +6,31 @@
 #include <cmath>
 using namespace std;
 
+vector<int> complement(vector<int> v){
+    int n = v.size();
+    int i;
+    for (i = n-1 ; i >= 0 ; i--){
+        if(v[i] == 1){
+            break;
+        }
+    }
+    if (i == -1){
+        v.insert(v.begin(),1);
+        return v;
+    }
+    for (int n = i-1; n>= 0; n--){
+        if(v[n]== 1){
+            v[n]= 0;
+        }else{
+            v[n]= 1;
+        }
+    }
+    while (v.size()> 32){
+        v.erase(v.begin());
+    }
+    return v;
+}
+
 vector<int> strToBinary(string inputValue){
     vector<int> binList;
     for (std::size_t i = 0;  i < inputValue.size(); ++i){
@@ -35,9 +60,11 @@ vector<int> strToBinary(string inputValue){
 
 }
 
-vector<int> decToBinary32(long long int num){
+vector<int> decToBinary32(long long int num2){
     int binaryNum[32];
     vector<int> reversedBin;
+
+    long long int num = abs(num2);
 
     int i = 0;
     while (num > 0){
@@ -45,6 +72,7 @@ vector<int> decToBinary32(long long int num){
         num = num / 2;
         i++;
     };
+
 
     //cout << sizeof(binaryNum)<< endl;
     //for (int i = 0;  i < sizeof(binaryNum); ++i){
@@ -57,6 +85,9 @@ vector<int> decToBinary32(long long int num){
 
     while (reversedBin.size() < 32){
         reversedBin.insert(reversedBin.begin(), 0);
+    }
+    while (reversedBin.size()> 32){
+        reversedBin.erase(reversedBin.begin());
     }
     //for ( int j = i -1; j >= 0; j--){
     //    cout<< binaryNum[j];
@@ -403,12 +434,12 @@ void compressFunction(vector<int> proccessedBinList){
             //}
             entryMessage.push_back(M);
         }
-        // for (int i = 0;  i < entryMessage.size(); i++){
-        //         for (int n = 0;  n < entryMessage[i].size(); n++){
-        //         cout << entryMessage[i][n];
-        //     }
-        //     cout << endl;
-        //     }
+        for (int i = 0;  i < entryMessage.size(); i++){
+                for (int n = 0;  n < entryMessage[i].size(); n++){
+                cout << entryMessage[i][n];
+            }
+            cout << endl;
+            }
 
         //cout << "w: " << endl;
         //sigma0(entryMessage[16-15]);
@@ -451,10 +482,21 @@ void compressFunction(vector<int> proccessedBinList){
             // cout << s1_decimal <<endl;
             // I exceeded the maximum number the integer can store
             long long int sum = w_i_16_decimal + s0_decimal + w_i_7_decimal + s1_decimal;
-            cout<< "sum: "<< sum;
+            // cout<< "w_i_16_decimal: "<< w_i_16_decimal << endl;
+            // cout<< "s0_decimal: "<< s0_decimal << endl;
+            // cout<< "w_i_7_decimal: "<< w_i_7_decimal << endl;
+            // cout<< "s1_decimal: "<< s1_decimal << endl;
+            //cout<< "sum: "<< sum << endl;
+            vector<int> wn;
+            if (0 >= sum){
+                wn = decToBinary32(sum);
+                wn = complement(wn);
+
+            }else{
+                wn = decToBinary32(sum);
+            }
             //vector<int> addedbin = decToBinary(sum);
             //vector<int> wn = additionMod32(entryMessage[i-16], sigma0ModdedResult, entryMessage[i-7], sigma1ModdedResult);
-            vector<int> wn = decToBinary32(sum);
             // cout << endl;
             cout << "w"<<i<<":";
             for (int n = 0;  n < wn.size(); n++){
