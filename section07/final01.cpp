@@ -437,14 +437,30 @@ vector<int>  s0(vector<int>e){
 vector<int> ch(vector<int>e, vector<int>f, vector<int>g){
     vector<int> result;
     for(int i = 0; i < 32; i++){
-        if(e[i]= 0){
-            result.push_back(g[i]);
-        }else if (e[i]= 1){
-            result.push_back(f[i]);
-        }
-    return result;
-
+       if(e[i]== 0){
+           result.push_back(g[i]);
+       }else if (e[i]== 1){
+           result.push_back(f[i]);
+       }
     }
+    //for(int i = 0; i < 32; i++){
+    //    if(e[i]== 1 && f[i] == 1){
+    //       result.push_back(1);
+    //       cout << "1";
+    //    }else{
+    //        result.push_back(0);
+    //        cout<< "0";
+    //       }
+    
+    //for(int i = 0; i < 32; i++){{
+    //    if(e[i]== 0){
+    //        result.push_back(g[i]);
+    //    }else if (e[i]= 1){
+    //        result.push_back(f[i]);
+    //    }
+    //}
+    //}
+    return result;
 
 }
 
@@ -642,12 +658,90 @@ void compressFunction(vector<int> proccessedBinList){
     for (int i = 0; i < 1; i++){
         //vector<int> tn = h + s1(e) + ch(e,f,g)+ kn[i] + entryMessage[i];
         long long int h_decimal = binToDecimal(h);
+        vector<int> hbin;
+        if (0 >= h_decimal){
+                hbin = decToBinary32(h_decimal);
+                hbin = complement(hbin);
+
+            }else{
+                hbin = decToBinary32(h_decimal);
+            }
+        cout << endl<< "hbin: ";
+            for (int n = 0;  n < hbin.size(); n++){
+                       cout << hbin[n];
+            }
+            cout <<endl;
         long long int s1_decimal = binToDecimal(s1(e));
+        vector<int> sibin;
+        if (0 >= s1_decimal){
+                sibin = decToBinary32(s1_decimal);
+                sibin = complement(sibin);
+
+            }else{
+                sibin = decToBinary32(s1_decimal);
+            }
+        cout << endl<< "sibin: ";
+            for (int n = 0;  n < sibin.size(); n++){
+                       cout << sibin[n];
+            }
+            cout <<endl;
         long long int ch_decimal = binToDecimal(ch(e,f,g));
+        vector<int> chbin;
+        if (0 >= ch_decimal){
+                chbin = decToBinary32(ch_decimal);
+                chbin = complement(chbin);
+
+            }else{
+                chbin = decToBinary32(ch_decimal);
+            }
+        cout << endl<< "chbin: ";
+            for (int n = 0;  n < chbin.size(); n++){
+                       cout << chbin[n];
+            }
+            cout <<endl;
         long long int kn_decimal = binToDecimal(kn[i]);
+        vector<int> knbin;
+        if (0 >= kn_decimal){
+                knbin = decToBinary32(kn_decimal);
+                knbin = complement(knbin);
+
+            }else{
+                knbin = decToBinary32(kn_decimal);
+            }
+        cout << endl<< "knbin: ";
+            for (int n = 0;  n < knbin.size(); n++){
+                       cout << knbin[n];
+            }
+            cout <<endl;
         long long int wn_decimal = binToDecimal(entryMessage[i]);
+        vector<int> wnbin;
+        if (0 >= wn_decimal){
+                wnbin = decToBinary32(wn_decimal);
+                wnbin = complement(wnbin);
+
+            }else{
+                wnbin = decToBinary32(wn_decimal);
+            }
+        cout << endl<< "wnbin: ";
+            for (int n = 0;  n < wnbin.size(); n++){
+                       cout << wnbin[n];
+            }
+            cout <<endl;
         long long int sum = h_decimal + s1_decimal + ch_decimal + kn_decimal + wn_decimal;
+        vector<int> tn;
         cout << sum;
+        if (0 >= sum){
+                tn = decToBinary32(sum);
+                tn = complement(tn);
+
+            }else{
+                tn = decToBinary32(sum);
+            }
+        cout << endl<< "t"<<i<<":";
+            for (int n = 0;  n < tn.size(); n++){
+                       cout << tn[n];
+            }
+            cout <<endl;
     }
     //return entryMessage;
 }
